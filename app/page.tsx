@@ -1,0 +1,23 @@
+const values = [
+  ['01', 'Arribo oportuno', 'Reducimos tiempos de respuesta porque sabemos que cada minuto cambia la percepción del asegurado.'],
+  ['02', 'Trato cercano', 'Un equipo técnicamente capaz, con alto enfoque al cliente y atención verdaderamente humana.'],
+  ['03', 'Investigación sólida', 'Documentamos cada caso con fotografías, evidencias y conclusiones claras para la compañía.'],
+];
+const regions = [
+  ['San Luis Potosí', 'Capital, sus 58 municipios y colindancias estratégicas.'],
+  ['Aguascalientes', 'Los 11 municipios y zonas limítrofes de Zacatecas y Jalisco.'],
+  ['Baja California Sur', 'La Paz, Los Cabos, Todos Santos, Constitución y Loreto.'],
+  ['Cobertura extendida', 'Presencia operativa en Colima, Tepic y atención nacional mediante nuestra red.'],
+];
+export default function Home() {
+  return <main>
+    <header className="site-header"><a href="#inicio" aria-label="Inicio DAREY"><img src="/darey-logo.png" alt="DAREY Ajustadores Profesionales" /></a><nav aria-label="Navegación principal"><a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#cobertura">Cobertura</a><a className="nav-cta" href="#contacto">Contacto</a></nav></header>
+    <section className="hero" id="inicio"><div className="hero-image" aria-hidden="true"/><div className="hero-shade"/><div className="hero-content"><p className="eyebrow">Ajustadores profesionales · San Luis Potosí</p><h1>Respuesta oportuna.<br/><span>Atención humana.</span></h1><p className="hero-copy">Acompañamos cada siniestro con experiencia, claridad y atención cercana, cuidando la imagen de nuestros socios comerciales.</p><div className="hero-actions"><a className="button primary" href="#contacto">Solicitar atención</a><a className="button ghost" href="#nosotros">Conocer DAREY</a></div></div><div className="hero-stat"><strong>35</strong><span>años de experiencia respaldan nuestro trabajo</span></div></section>
+    <section className="intro section" id="nosotros"><div><p className="section-kicker">Quiénes somos</p><h2>Experiencia que se traduce en <em>confianza.</em></h2></div><div className="intro-copy"><p>DAREY es una empresa con más de seis años en el mercado asegurador, respaldada por 35 años de experiencia ofreciendo soluciones al sector.</p><p>Conocemos las necesidades de compañías y asegurados. Por eso, cada intervención combina atención profesional, comunicación clara y respeto por la imagen de nuestros socios.</p></div></section>
+    <section className="values section" aria-label="Nuestros compromisos">{values.map(([num,title,copy])=><article key={num}><span>{num}</span><h3>{title}</h3><p>{copy}</p></article>)}</section>
+    <section className="process" id="proceso"><div className="process-heading"><p className="section-kicker light">Nuestro proceso</p><h2>Del primer reporte a una conclusión bien sustentada.</h2></div><ol><li><b>01</b><div><h3>Recepción y contacto</h3><p>Recibimos el reporte, validamos la información y contactamos al asegurado.</p></div></li><li><b>02</b><div><h3>Atención en sitio</h3><p>Arribamos al lugar, identificamos unidades y damos acompañamiento ante la autoridad.</p></div></li><li><b>03</b><div><h3>Investigación</h3><p>Recabamos declaraciones, fotografías, documentos y evidencias necesarias.</p></div></li><li><b>04</b><div><h3>Entrega documentada</h3><p>Integramos el cuadernillo y presentamos conclusiones a la compañía de seguros.</p></div></li></ol></section>
+    <section className="coverage section" id="cobertura"><div className="coverage-head"><p className="section-kicker">Cobertura regional</p><h2>Cercanía operativa donde más se necesita.</h2><p>Una red preparada para atender siniestros en la región y responder a necesidades específicas de nuestros socios comerciales.</p></div><div className="region-grid">{regions.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+    <section className="partners section"><p className="section-kicker">Experiencia compartida</p><h2>Relaciones construidas sobre resultados.</h2><p>DAREY ha colaborado con organizaciones como Más Soluciones, Seguros Afirme, Movilidad de Transporte Urbano y Colectivo Potosino, Grupo Zeus, Seguros El Águila y General de Seguros.</p></section>
+    <footer id="contacto"><div><img src="/darey-logo.png" alt="DAREY Ajustadores Profesionales"/><p>Atención profesional de siniestros desde San Luis Potosí.</p></div><div className="contact"><span>Contacto</span><h2>Alejandro<br/>Arellano Morán</h2><p>Dirección · DAREY Ajustadores Profesionales S.C.</p></div><a className="top" href="#inicio" aria-label="Volver al inicio">↑</a></footer>
+  </main>;
+}
