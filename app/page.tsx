@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from 'react';
+
 const pillars = [
   {
     icon: 'fa-shield-halved',
@@ -77,6 +81,35 @@ const partners = [
 ];
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    telefono: '',
+    aseguradora: '',
+    ubicacion: '',
+    tipoSiniestro: 'Colisión / Choque Vehicular',
+    detalles: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const phone = '524440000000';
+    let msg = '*🚨 SOLICITUD DE AJUSTADOR - DAREY S.C. 🚨*\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━\n';
+    msg += `👤 *Reportante:* ${formData.nombre}\n`;
+    msg += `📞 *Teléfono:* ${formData.telefono}\n`;
+    msg += `🏢 *Aseguradora/Empresa:* ${formData.aseguradora}\n`;
+    msg += `📍 *Ubicación del Siniestro:* ${formData.ubicacion}\n`;
+    msg += `🚗 *Tipo de Siniestro:* ${formData.tipoSiniestro}\n`;
+    if (formData.detalles) {
+      msg += `📝 *Detalles/Folio:* ${formData.detalles}\n`;
+    }
+    msg += '━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '_Solicitud enviada desde portal web DAREY_';
+
+    const encoded = encodeURIComponent(msg);
+    window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`, '_blank');
+  };
+
   return (
     <main>
       {/* Floating WhatsApp */}
@@ -95,7 +128,7 @@ export default function Home() {
       <header className="site-header">
         <div className="container header-inner">
           <a href="#inicio" className="brand-logo" aria-label="Inicio DAREY">
-            <img src="/darey-logo-light.png" alt="DAREY Ajustadores Profesionales S.C." />
+            <img src="/darey-logo-transparent.png" alt="DAREY Ajustadores Profesionales S.C." />
           </a>
           <nav className="nav-menu">
             <a href="#inicio" className="nav-link">Inicio</a>
@@ -286,8 +319,151 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Captura de Datos & WhatsApp */}
+      <section className="section contact-form-section" id="contacto">
+        <div className="container">
+          <div className="contact-container-grid">
+            <div className="contact-info-card">
+              <h2 className="contact-info-title">Atención Inmediata a Siniestros</h2>
+              <p className="contact-info-desc">
+                Coordina la asignación de un ajustador pericial en tiempo récord. Completa los datos del siniestro para generar un folio y reporte directo por WhatsApp.
+              </p>
+              <div className="contact-item-row">
+                <div className="contact-item-icon"><i className="fa-solid fa-clock"></i></div>
+                <div className="contact-item-text">
+                  <strong>Disponibilidad Continua</strong>
+                  <span>Servicio 24 horas · 365 días del año</span>
+                </div>
+              </div>
+              <div className="contact-item-row">
+                <div className="contact-item-icon"><i className="fa-solid fa-location-dot"></i></div>
+                <div className="contact-item-text">
+                  <strong>Base Operativa</strong>
+                  <span>San Luis Potosí, SLP (Atención regional y foránea)</span>
+                </div>
+              </div>
+              <div className="contact-item-row">
+                <div className="contact-item-icon"><i className="fa-solid fa-envelope"></i></div>
+                <div className="contact-item-text">
+                  <strong>Correo Corporativo</strong>
+                  <span>contacto@darey.com.mx</span>
+                </div>
+              </div>
+              <div style={{ marginTop: '36px', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.15)' }}>
+                <p style={{ fontSize: '13.5px', color: 'var(--amarillo-darey)', fontWeight: 700, marginBottom: '6px' }}>
+                  DAREY AJUSTADORES PROFESIONALES S.C.
+                </p>
+                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>
+                  Profesionalismo en movimiento.
+                </p>
+              </div>
+            </div>
+
+            <div className="form-wrapper-card">
+              <h3 className="form-wrapper-title">Solicitar Ajustador / Reporte</h3>
+              <p className="form-wrapper-subtitle">Completa los campos para generar automáticamente tu mensaje de WhatsApp estructurado.</p>
+              <form onSubmit={handleSubmit}>
+                <div className="form-grid-2">
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="nombre">Nombre / Reportante *</label>
+                    <input
+                      type="text"
+                      id="nombre"
+                      className="form-input"
+                      placeholder="Ej. Juan Pérez / Cabina"
+                      required
+                      value={formData.nombre}
+                      onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="telefono">Teléfono de Contacto *</label>
+                    <input
+                      type="tel"
+                      id="telefono"
+                      className="form-input"
+                      placeholder="Ej. 444 123 4567"
+                      required
+                      value={formData.telefono}
+                      onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="aseguradora">Aseguradora / Empresa *</label>
+                    <select
+                      id="aseguradora"
+                      className="form-select"
+                      required
+                      value={formData.aseguradora}
+                      onChange={(e) => setFormData({ ...formData, aseguradora: e.target.value })}
+                    >
+                      <option value="">Selecciona una opción</option>
+                      <option value="Seguros Afirme">Seguros Afirme</option>
+                      <option value="Seguros El Águila">Seguros El Águila</option>
+                      <option value="General de Seguros">General de Seguros</option>
+                      <option value="Más Soluciones">Más Soluciones</option>
+                      <option value="Transporte Urbano / Colectivo">Transporte Urbano / Colectivo</option>
+                      <option value="Grupo Zeus">Grupo Zeus</option>
+                      <option value="Particular / Otra Aseguradora">Particular / Otra Aseguradora</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="ubicacion">Ubicación / Ciudad *</label>
+                    <input
+                      type="text"
+                      id="ubicacion"
+                      className="form-input"
+                      placeholder="Ej. San Luis Potosí (Carr. 57)"
+                      required
+                      value={formData.ubicacion}
+                      onChange={(e) => setFormData({ ...formData, ubicacion: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="tipoSiniestro">Tipo de Siniestro</label>
+                  <select
+                    id="tipoSiniestro"
+                    className="form-select"
+                    value={formData.tipoSiniestro}
+                    onChange={(e) => setFormData({ ...formData, tipoSiniestro: e.target.value })}
+                  >
+                    <option value="Colisión / Choque Vehicular">Colisión / Choque Vehicular</option>
+                    <option value="Transporte Pesado / Carga">Transporte Pesado / Carga</option>
+                    <option value="Transporte de Pasajeros">Transporte de Pasajeros</option>
+                    <option value="Daños a Terceros / Bienes">Daños a Terceros / Bienes</option>
+                    <option value="Robo / Asistencia Legal">Robo / Asistencia Legal</option>
+                    <option value="Investigación Pericial Especializada">Investigación Pericial Especializada</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="detalles">Detalles / Folio de Siniestro (Opcional)</label>
+                  <textarea
+                    id="detalles"
+                    className="form-textarea"
+                    placeholder="Describe brevemente la situación, folio de reporte..."
+                    value={formData.detalles}
+                    onChange={(e) => setFormData({ ...formData, detalles: e.target.value })}
+                  />
+                </div>
+
+                <button type="submit" className="btn-send-whatsapp">
+                  <i className="fa-brands fa-whatsapp"></i>
+                  <span>Enviar reporte a WhatsApp DAREY</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer id="contacto">
+      <footer>
         <div className="container">
           <div className="footer-grid">
             <div className="footer-brand">
@@ -316,12 +492,12 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="footer-title">Contacto Directo</h4>
+              <h4 className="footer-title">DAREY S.C.</h4>
               <div className="footer-contact-item">
-                <i className="fa-solid fa-user-tie"></i>
+                <i className="fa-solid fa-shield-halved"></i>
                 <div>
-                  <strong>Alejandro Arellano Morán</strong>
-                  <span>Dirección General · DAREY</span>
+                  <strong>DAREY Ajustadores Profesionales S.C.</strong>
+                  <span>Ajuste de siniestros e investigación pericial</span>
                 </div>
               </div>
               <div className="footer-contact-item">
@@ -353,7 +529,7 @@ export default function Home() {
 
           <div className="footer-bottom">
             <p>&copy; 2026 DAREY Ajustadores Profesionales S.C. Todos los derechos reservados.</p>
-            <p>Identidad Gráfica Oficial · Desarrollado con altos estándares de calidad</p>
+            <p>Identidad Gráfica Oficial · Profesionalismo en movimiento</p>
           </div>
         </div>
       </footer>
