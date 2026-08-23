@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAREY Ajustadores Profesionales S.C. | San Luis Potosí</title>
+  <meta name="description" content="Ajustadores profesionales en San Luis Potosí y la región. Atención oportuna, trato humano e investigación sólida para compañías de seguros.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root { --teal:#0795aa; --navy:#102b3a; --yellow:#ffd21a; --paper:#f6f5f1; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--navy); font-family:Arial,Helvetica,sans-serif; }
+    .site-header { position:absolute; z-index:10; top:0; left:0; width:100%; display:flex; align-items:center; justify-content:space-between; padding:24px clamp(24px,6vw,96px); }
+    .site-header img { width:240px; height:auto; filter:brightness(0) invert(1); }
+    .site-header nav { display:flex; align-items:center; gap:32px; }
+    .site-header a { color:white; text-decoration:none; font-size:14px; font-weight:700; }
+    .nav-cta { border:1px solid rgba(255,255,255,.55); border-radius:999px; padding:11px 19px; }
+    .hero { min-height:100vh; position:relative; display:flex; align-items:center; overflow:hidden; color:white; }
+    .hero-image,.hero-shade { position:absolute; inset:0; }
+    .hero-image { background:url('san-luis.jpg') center/cover no-repeat; transform:scale(1.02); }
+    .hero-shade { background:linear-gradient(90deg,rgba(5,27,39,.94) 0%,rgba(5,27,39,.76) 48%,rgba(5,27,39,.14) 100%); }
+    .hero-content { position:relative; z-index:2; max-width:790px; padding:150px clamp(24px,8vw,128px) 110px; }
+    .eyebrow { color:var(--yellow); letter-spacing:.16em; text-transform:uppercase; font-size:13px; font-weight:800; }
+    h1 { margin:18px 0 24px; font-size:clamp(48px,7vw,92px); line-height:.97; letter-spacing:-.055em; }
+    h1 span { color:#57c7d2; }
+    .hero-copy { max-width:650px; color:rgba(255,255,255,.8); font-size:clamp(18px,2vw,22px); line-height:1.55; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:38px; }
+    .button { padding:15px 23px; border-radius:999px; font-weight:800; text-decoration:none; }
+    .primary { background:var(--yellow); color:var(--navy); }
+    .ghost { color:white; border:1px solid rgba(255,255,255,.45); }
+    .hero-stat { position:absolute; z-index:2; right:clamp(24px,6vw,90px); bottom:45px; width:270px; padding:20px 0 0 24px; border-left:3px solid var(--yellow); }
+    .hero-stat strong { display:block; font-size:52px; line-height:.8; color:var(--yellow); }
+    .hero-stat span { display:block; margin-top:12px; color:rgba(255,255,255,.75); line-height:1.35; }
+    @media (max-width:720px) { .site-header nav a:not(.nav-cta){display:none}.site-header img{width:180px}.hero-stat{display:none}.hero-content{padding-top:130px}.hero-shade{background:rgba(5,27,39,.8)} }
+    .section { padding:clamp(78px,10vw,150px) clamp(24px,8vw,128px); }
+    .section-kicker { margin:0 0 20px; color:var(--teal); text-transform:uppercase; letter-spacing:.18em; font-size:12px; font-weight:900; }
+    .intro { display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(48px,9vw,150px); align-items:start; }
+    h2 { margin:0; font-size:clamp(38px,5vw,70px); line-height:1.04; letter-spacing:-.045em; }
+    h2 em { color:var(--teal); font-style:normal; }
+    .intro-copy { padding-top:42px; font-size:18px; line-height:1.7; color:#51606a; }
+    .values { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; padding-top:0; }
+    .values article { border-top:1px solid #bdc8cc; padding:30px 34px 32px 0; }
+    .values article+article { padding-left:34px; border-left:1px solid #d4dadc; }
+    .values span,.region-grid span { color:var(--teal); font-size:12px; font-weight:900; letter-spacing:.12em; }
+    .values h3,.region-grid h3,.process h3 { font-size:24px; margin:45px 0 12px; }
+    .values p,.region-grid p,.process p,.coverage-head>p:last-child,.partners>p:last-child { color:#627078; line-height:1.65; }
+    .process { background:var(--navy); color:white; display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(50px,10vw,160px); padding:clamp(80px,11vw,150px) clamp(24px,8vw,128px); }
+    .section-kicker.light { color:#63c8d2; }
+    .process ol { list-style:none; margin:0; padding:0; }
+    .process li { display:grid; grid-template-columns:60px 1fr; gap:26px; padding:26px 0; border-top:1px solid rgba(255,255,255,.18); }
+    .process li:last-child { border-bottom:1px solid rgba(255,255,255,.18); }
+    .process li b { color:var(--yellow); padding-top:5px; }
+    .process h3 { margin:0 0 6px; }.process p { margin:0; color:rgba(255,255,255,.62); }
+    .coverage { background:#e8f2f2; display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(50px,9vw,140px); }
+    .coverage-head>p:last-child { max-width:540px; font-size:18px; }
+    .region-grid { display:grid; grid-template-columns:1fr 1fr; }
+    .region-grid article { padding:10px 30px 36px; border-bottom:1px solid #bdcecf; }
+    .region-grid article:nth-child(odd){border-right:1px solid #bdcecf;padding-left:0}.region-grid article:nth-child(even){padding-right:0}
+    .region-grid h3 { margin:30px 0 10px; }
+    .partners { text-align:center; max-width:1100px; margin:auto; }
+    .partners h2 { max-width:850px; margin:0 auto 28px; }.partners>p:last-child{max-width:800px;margin:auto;font-size:18px}
+    footer { background:#071c27; color:white; padding:72px clamp(24px,8vw,128px); display:grid; grid-template-columns:1fr 1fr auto; gap:70px; align-items:end; }
+    footer img { width:240px; filter:brightness(0) invert(1); } footer>div>p{color:rgba(255,255,255,.55);max-width:300px;line-height:1.6}
+    .contact span { color:var(--yellow); text-transform:uppercase; font-size:11px; letter-spacing:.18em; font-weight:900; }
+    .contact h2 { font-size:40px; margin:14px 0; }.contact p{font-size:13px}.top{display:grid;place-items:center;width:52px;height:52px;border:1px solid rgba(255,255,255,.3);border-radius:50%;color:white;text-decoration:none;font-size:24px}
+    @media(max-width:850px){.intro,.process,.coverage{grid-template-columns:1fr}.values{grid-template-columns:1fr}.values article+article{padding-left:0;border-left:0}.region-grid{grid-template-columns:1fr}.region-grid article{padding:25px 0!important;border-right:0!important}footer{grid-template-columns:1fr}.site-header nav{gap:12px}}
+  </style>
+</head>
+<body>
+  <main>
+    <header class="site-header">
+      <a href="#inicio" aria-label="Inicio DAREY">
+        <img src="darey-logo.png" alt="DAREY Ajustadores Profesionales" />
+      </a>
+      <nav aria-label="Navegación principal">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#cobertura">Cobertura</a>
+        <a class="nav-cta" href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+      <div class="hero-image" aria-hidden="true"></div>
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Ajustadores profesionales · San Luis Potosí</p>
+        <h1>Respuesta oportuna.<br/><span>Atención humana.</span></h1>
+        <p class="hero-copy">Acompañamos cada siniestro con experiencia, claridad y atención cercana, cuidando la imagen de nuestros socios comerciales.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#contacto">Solicitar atención</a>
+          <a class="button ghost" href="#nosotros">Conocer DAREY</a>
+        </div>
+      </div>
+      <div class="hero-stat">
+        <strong>35</strong>
+        <span>años de experiencia respaldan nuestro trabajo</span>
+      </div>
+    </section>
+
+    <section class="intro section" id="nosotros">
+      <div>
+        <p class="section-kicker">Quiénes somos</p>
+        <h2>Experiencia que se traduce en <em>confianza.</em></h2>
+      </div>
+      <div class="intro-copy">
+        <p>DAREY es una empresa con más de seis años en el mercado asegurador, respaldada por 35 años de experiencia ofreciendo soluciones al sector.</p>
+        <p>Conocemos las necesidades de compañías y asegurados. Por eso, cada intervención combina atención profesional, comunicación clara y respeto por la imagen de nuestros socios.</p>
+      </div>
+    </section>
+
+    <section class="values section" aria-label="Nuestros compromisos">
+      <article>
+        <span>01</span>
+        <h3>Arribo oportuno</h3>
+        <p>Reducimos tiempos de respuesta porque sabemos que cada minuto cambia la percepción del asegurado.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Trato cercano</h3>
+        <p>Un equipo técnicamente capaz, con alto enfoque al cliente y atención verdaderamente humana.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Investigación sólida</h3>
+        <p>Documentamos cada caso con fotografías, evidencias y conclusiones claras para la compañía.</p>
+      </article>
+    </section>
+
+    <section class="process" id="proceso">
+      <div class="process-heading">
+        <p class="section-kicker light">Nuestro proceso</p>
+        <h2>Del primer reporte a una conclusión bien sustaineda.</h2>
+      </div>
+      <ol>
+        <li>
+          <b>01</b>
+          <div>
+            <h3>Recepción y contacto</h3>
+            <p>Recibimos el reporte, validamos la información y contactamos al asegurado.</p>
+          </div>
+        </li>
+        <li>
+          <b>02</b>
+          <div>
+            <h3>Atención en sitio</h3>
+            <p>Arribamos al lugar, identificamos unidades y damos acompañamiento ante la autoridad.</p>
+          </div>
+        </li>
+        <li>
+          <b>03</b>
+          <div>
+            <h3>Investigación</h3>
+            <p>Recabamos declaraciones, fotografías, documentos y evidencias necesarias.</p>
+          </div>
+        </li>
+        <li>
+          <b>04</b>
+          <div>
+            <h3>Entrega documentada</h3>
+            <p>Integramos el cuadernillo y presentamos conclusiones a la compañía de seguros.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="coverage section" id="cobertura">
+      <div class="coverage-head">
+        <p class="section-kicker">Cobertura regional</p>
+        <h2>Cercanía operativa donde más se necesita.</h2>
+        <p>Una red preparada para atender siniestros en la región y responder a necesidades específicas de nuestros socios comerciales.</p>
+      </div>
+      <div class="region-grid">
+        <article>
+          <span>01</span>
+          <h3>San Luis Potosí</h3>
+          <p>Capital, sus 58 municipios y colindancias estratégicas.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Aguascalientes</h3>
+          <p>Los 11 municipios y zonas limítrofes de Zacatecas y Jalisco.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Baja California Sur</h3>
+          <p>La Paz, Los Cabos, Todos Santos, Constitución y Loreto.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Cobertura extendida</h3>
+          <p>Presencia operativa en Colima, Tepic y atención nacional mediante nuestra red.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="partners section">
+      <p class="section-kicker">Experiencia compartida</p>
+      <h2>Relaciones construidas sobre resultados.</h2>
+      <p>DAREY ha colaborado con organizaciones como Más Soluciones, Seguros Afirme, Movilidad de Transporte Urbano y Colectivo Potosino, Grupo Zeus, Seguros El Águila y General de Seguros.</p>
+    </section>
+
+    <footer id="contacto">
+      <div>
+        <img src="darey-logo.png" alt="DAREY Ajustadores Profesionales"/>
+        <p>Atención profesional de siniestros desde San Luis Potosí.</p>
+      </div>
+      <div class="contact">
+        <span>Contacto</span>
+        <h2>Alejandro<br/>Arellano Morán</h2>
+        <p>Dirección · DAREY Ajustadores Profesionales S.C.</p>
+      </div>
+      <a class="top" href="#inicio" aria-label="Volver al inicio">↑</a>
+    </footer>
+  </main>
+</body>
+</html>
