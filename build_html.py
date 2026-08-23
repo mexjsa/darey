@@ -12,8 +12,8 @@ template = """<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAREY Ajustadores Profesionales S.C. | Profesionalismo en movimiento</title>
-  <meta name="description" content="DAREY Ajustadores Profesionales S.C. - En DAREY conectamos experiencia, precisión y confianza para brindar soluciones profesionales en ajuste de siniestros. San Luis Potosí, Aguascalientes, BCS y cobertura nacional.">
+  <title>DAREY Ajustadores Profesionales S.C. | Soluciones en Campo para Socios Comerciales</title>
+  <meta name="description" content="DAREY Ajustadores Profesionales S.C. - Alianzas operativas y soluciones en campo para compañías aseguradoras, despachos periciales y empresas de transporte. San Luis Potosí, Aguascalientes, BCS y Red Nacional.">
   
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,__ICON_B64__">
@@ -744,21 +744,21 @@ template = """<!DOCTYPE html>
     }
 
     /* =========================================================
-       NUEVA SECCIÓN: CAPTURA DE DATOS Y COMPOSICIÓN WHATSAPP
+       NUEVA SECCIÓN B2B: ALIANZAS Y SOLUCIONES PARA SOCIOS
        ========================================================= */
-    .contact-form-section {
+    .partners-form-section {
       background: linear-gradient(180deg, #F4F9FB 0%, #E6EFF2 100%);
       position: relative;
     }
 
-    .contact-container-grid {
+    .partners-form-grid {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
       gap: 48px;
       align-items: start;
     }
 
-    .contact-info-card {
+    .partner-value-card {
       background: var(--azul-profundo);
       color: var(--blanco);
       border-radius: 20px;
@@ -768,7 +768,7 @@ template = """<!DOCTYPE html>
       overflow: hidden;
     }
 
-    .contact-info-card::before {
+    .partner-value-card::before {
       content: '';
       position: absolute;
       top: -30%;
@@ -779,28 +779,29 @@ template = """<!DOCTYPE html>
       pointer-events: none;
     }
 
-    .contact-info-title {
+    .partner-value-title {
       font-size: 26px;
       font-weight: 800;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       color: var(--blanco);
+      line-height: 1.2;
     }
 
-    .contact-info-desc {
+    .partner-value-desc {
       font-size: 15px;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.88);
       line-height: 1.65;
       margin-bottom: 30px;
     }
 
-    .contact-item-row {
+    .solution-item {
       display: flex;
       align-items: flex-start;
       gap: 16px;
       margin-bottom: 22px;
     }
 
-    .contact-item-icon {
+    .solution-icon {
       width: 44px;
       height: 44px;
       border-radius: 12px;
@@ -813,19 +814,20 @@ template = """<!DOCTYPE html>
       flex-shrink: 0;
     }
 
-    .contact-item-text strong {
+    .solution-text strong {
       display: block;
       font-size: 15px;
       color: var(--blanco);
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
-    .contact-item-text span {
+    .solution-text span {
       font-size: 13.5px;
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.5;
     }
 
-    .form-wrapper-card {
+    .partner-form-card {
       background: var(--blanco);
       border-radius: 20px;
       padding: 44px;
@@ -833,17 +835,18 @@ template = """<!DOCTYPE html>
       border: 1px solid var(--border-color);
     }
 
-    .form-wrapper-title {
+    .partner-form-title {
       font-size: 24px;
       font-weight: 800;
       color: var(--azul-profundo);
       margin-bottom: 6px;
     }
 
-    .form-wrapper-subtitle {
+    .partner-form-subtitle {
       font-size: 14px;
       color: var(--text-muted);
       margin-bottom: 28px;
+      line-height: 1.5;
     }
 
     .form-grid-2 {
@@ -890,33 +893,41 @@ template = """<!DOCTYPE html>
       min-height: 90px;
     }
 
-    .btn-send-whatsapp {
+    .btn-send-partner {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
       width: 100%;
       padding: 16px 28px;
-      background: #25D366;
+      background: var(--azul-darey);
       color: white;
       font-family: inherit;
       font-weight: 800;
-      font-size: 16px;
+      font-size: 15.5px;
       border-radius: 50px;
       border: none;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+      box-shadow: 0 6px 20px rgba(0, 137, 169, 0.35);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .btn-send-whatsapp:hover {
-      background: #20BA5A;
+    .btn-send-partner:hover {
+      background: var(--azul-profundo);
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
+      box-shadow: 0 10px 25px rgba(0, 90, 130, 0.45);
     }
 
-    .btn-send-whatsapp i {
-      font-size: 22px;
+    .btn-send-partner .btn-partner-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--amarillo-darey);
+      color: var(--carbon);
+      border-radius: 50%;
+      font-size: 13px;
     }
 
     .form-note {
@@ -1066,38 +1077,9 @@ template = """<!DOCTYPE html>
       transform: translateY(-4px);
     }
 
-    /* Floating WhatsApp Button */
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #25D366;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .floating-whatsapp i {
-      font-size: 22px;
-    }
-
-    .floating-whatsapp:hover {
-      transform: scale(1.05) translateY(-3px);
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55);
-    }
-
     /* Responsive */
     @media (max-width: 1024px) {
-      .hero-container, .about-grid, .process-grid, .coverage-grid, .contact-container-grid {
+      .hero-container, .about-grid, .process-grid, .coverage-grid, .partners-form-grid {
         grid-template-columns: 1fr;
         gap: 40px;
       }
@@ -1140,26 +1122,13 @@ template = """<!DOCTYPE html>
       .footer-grid {
         grid-template-columns: 1fr;
       }
-      .form-wrapper-card {
+      .partner-form-card {
         padding: 28px 20px;
-      }
-      .floating-whatsapp span {
-        display: none;
-      }
-      .floating-whatsapp {
-        padding: 14px;
-        border-radius: 50%;
       }
     }
   </style>
 </head>
 <body>
-
-  <!-- Floating Quick WhatsApp Button -->
-  <a href="https://wa.me/524440000000?text=Hola%20DAREY,%20requiero%20solicitar%20un%20ajustador" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contacto WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
-    <span>Atención Inmediata</span>
-  </a>
 
   <!-- Main Navigation Header -->
   <header class="site-header" id="site-header">
@@ -1181,8 +1150,8 @@ template = """<!DOCTYPE html>
         <li><a href="#cobertura" class="nav-link">Cobertura</a></li>
         <li><a href="#socios" class="nav-link">Socios</a></li>
         <li>
-          <a href="#contacto" class="btn-cta">
-            <span>Solicitar ajustador</span>
+          <a href="#alianza" class="btn-cta">
+            <span>Alianza Comercial</span>
             <span class="btn-icon-circle"><i class="fa-solid fa-chevron-right"></i></span>
           </a>
         </li>
@@ -1211,8 +1180,8 @@ template = """<!DOCTYPE html>
           </p>
           
           <div class="hero-actions">
-            <a href="#contacto" class="btn-cta btn-yellow">
-              <span>Solicitar atención inmediata</span>
+            <a href="#alianza" class="btn-cta btn-yellow">
+              <span>Conectar como socio comercial</span>
               <span class="btn-icon-circle"><i class="fa-solid fa-arrow-right"></i></span>
             </a>
             <a href="#nosotros" class="btn-ghost">
@@ -1230,14 +1199,14 @@ template = """<!DOCTYPE html>
             </div>
             <div class="stat-box">
               <div class="stat-number">24/7</div>
-              <div class="stat-label">Atención y coordinación inmediata en sitio</div>
+              <div class="stat-label">Atención y coordinación operativa en campo</div>
             </div>
           </div>
           
           <div class="hero-card-footer">
             <img src="data:image/jpeg;base64,__ICON_B64__" alt="Icono DAREY">
             <div class="hero-card-footer-text">
-              <strong>Siniestros & Ajustes Especializados</strong>
+              <strong>Soluciones Periciales para Socios</strong>
               San Luis Potosí, Aguascalientes, BCS y Red Nacional
             </div>
           </div>
@@ -1356,8 +1325,8 @@ template = """<!DOCTYPE html>
             <p class="section-subtitle">
               Protocolos estandarizados que aseguran un flujo de información continuo, documentación fotográfica exhaustiva y certidumbre jurídica en cada expediente.
             </p>
-            <a href="#contacto" class="btn-cta btn-yellow">
-              <span>Solicitar servicio pericial</span>
+            <a href="#alianza" class="btn-cta btn-yellow">
+              <span>Proponer esquema de colaboración</span>
               <span class="btn-icon-circle"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
           </div>
@@ -1466,45 +1435,45 @@ template = """<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- Formulario de Captura y Composición WhatsApp -->
-    <section class="section contact-form-section" id="contacto">
+    <!-- NUEVA SECCIÓN B2B: ALIANZAS Y SOLUCIONES EN CAMPO PARA SOCIOS -->
+    <section class="section partners-form-section" id="alianza">
       <div class="container">
-        <div class="contact-container-grid">
+        <div class="partners-form-grid">
           
-          <!-- Información y Canales Directos -->
-          <div class="contact-info-card">
-            <h2 class="contact-info-title">Atención Inmediata a Siniestros</h2>
-            <p class="contact-info-desc">
-              Coordina la asignación de un ajustador pericial en tiempo récord. Completa los datos del siniestro para generar un folio y reporte directo por WhatsApp.
+          <!-- Propuesta de Valor para Socios -->
+          <div class="partner-value-card">
+            <h2 class="partner-value-title">Soluciones Operativas en Campo a tu Medida</h2>
+            <p class="partner-value-desc">
+              Nos integramos como el brazo pericial y operativo de tu compañía o despacho en la región, garantizando altos estándares técnicos, cumplimiento de SLAs y protección de tu marca.
             </p>
 
-            <div class="contact-item-row">
-              <div class="contact-item-icon">
-                <i class="fa-solid fa-clock"></i>
+            <div class="solution-item">
+              <div class="solution-icon">
+                <i class="fa-solid fa-handshake"></i>
               </div>
-              <div class="contact-item-text">
-                <strong>Disponibilidad Continua</strong>
-                <span>Servicio 24 horas · 365 días del año</span>
-              </div>
-            </div>
-
-            <div class="contact-item-row">
-              <div class="contact-item-icon">
-                <i class="fa-solid fa-location-dot"></i>
-              </div>
-              <div class="contact-item-text">
-                <strong>Base Operativa</strong>
-                <span>San Luis Potosí, SLP (Atención regional y foránea)</span>
+              <div class="solution-text">
+                <strong>Para Aseguradoras y Despachos Nacionales</strong>
+                <span>Atención pericial local y foránea, desahogo de siniestros y reducción de costos operativos en zona centro y occidente.</span>
               </div>
             </div>
 
-            <div class="contact-item-row">
-              <div class="contact-item-icon">
-                <i class="fa-solid fa-envelope"></i>
+            <div class="solution-item">
+              <div class="solution-icon">
+                <i class="fa-solid fa-truck-moving"></i>
               </div>
-              <div class="contact-item-text">
-                <strong>Correo Corporativo</strong>
-                <span>contacto@darey.com.mx</span>
+              <div class="solution-text">
+                <strong>Para Empresas de Transporte y Flotillas</strong>
+                <span>Acompañamiento especializado en colisiones, siniestros de carga y negociación en sitio ante autoridades.</span>
+              </div>
+            </div>
+
+            <div class="solution-item">
+              <div class="solution-icon">
+                <i class="fa-solid fa-file-shield"></i>
+              </div>
+              <div class="solution-text">
+                <strong>Investigación Técnica y Cuadernillos Digitales</strong>
+                <span>Dictámenes con sustento pericial, levantamiento fotográfico y entrega de expedientes debidamente fundamentados.</span>
               </div>
             </div>
 
@@ -1513,74 +1482,91 @@ template = """<!DOCTYPE html>
                 DAREY AJUSTADORES PROFESIONALES S.C.
               </p>
               <p style="font-size: 13px; color: rgba(255,255,255,0.7);">
-                Profesionalismo en movimiento.
+                Conectando experiencia, precisión y confianza para impulsar tu operación.
               </p>
             </div>
           </div>
 
-          <!-- Formulario Interactivo -->
-          <div class="form-wrapper-card">
-            <h3 class="form-wrapper-title">Solicitar Ajustador / Reporte</h3>
-            <p class="form-wrapper-subtitle">Completa los campos para generar automáticamente tu mensaje de WhatsApp estructurado.</p>
+          <!-- Cuestionario para Nuevos Socios -->
+          <div class="partner-form-card">
+            <h3 class="partner-form-title">Conectar como Nuevo Socio Comercial</h3>
+            <p class="partner-form-subtitle">Completa este breve cuestionario para conocer tu organización y estructurar una propuesta operativa adaptada a tus necesidades en campo.</p>
 
-            <form id="reporteForm" onsubmit="handleFormSubmit(event)">
+            <form id="partnerForm" onsubmit="handlePartnerSubmit(event)">
               <div class="form-grid-2">
                 <div class="form-group">
-                  <label class="form-label" for="nombre">Nombre / Reportante *</label>
-                  <input type="text" id="nombre" class="form-input" placeholder="Ej. Juan Pérez / Cabina" required>
+                  <label class="form-label" for="nombreContacto">Nombre y Cargo *</label>
+                  <input type="text" id="nombreContacto" class="form-input" placeholder="Ej. Lic. Carlos Méndez / Gerente de Siniestros" required>
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label" for="telefono">Teléfono de Contacto *</label>
+                  <label class="form-label" for="empresa">Empresa / Institución *</label>
+                  <input type="text" id="empresa" class="form-input" placeholder="Ej. Aseguradora / Despacho / Flotilla" required>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="tipoOrganizacion">Tipo de Organización *</label>
+                  <select id="tipoOrganizacion" class="form-select" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Compañía Aseguradora">Compañía Aseguradora</option>
+                    <option value="Despacho Pericial / Firma de Ajuste">Despacho Pericial / Firma de Ajuste</option>
+                    <option value="Empresa de Transporte / Logística">Empresa de Transporte / Logística</option>
+                    <option value="Broker / Correduría de Seguros">Broker / Correduría de Seguros</option>
+                    <option value="Institución Financiera / Corporativo">Institución Financiera / Corporativo</option>
+                    <option value="Otra Empresa">Otra Empresa</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="telefono">Teléfono / WhatsApp Directo *</label>
                   <input type="tel" id="telefono" class="form-input" placeholder="Ej. 444 123 4567" required>
                 </div>
               </div>
 
               <div class="form-grid-2">
                 <div class="form-group">
-                  <label class="form-label" for="aseguradora">Aseguradora / Empresa *</label>
-                  <select id="aseguradora" class="form-select" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="Seguros Afirme">Seguros Afirme</option>
-                    <option value="Seguros El Águila">Seguros El Águila</option>
-                    <option value="General de Seguros">General de Seguros</option>
-                    <option value="Más Soluciones">Más Soluciones</option>
-                    <option value="Transporte Urbano / Colectivo">Transporte Urbano / Colectivo</option>
-                    <option value="Grupo Zeus">Grupo Zeus</option>
-                    <option value="Particular / Otra Aseguradora">Particular / Otra Aseguradora</option>
-                  </select>
+                  <label class="form-label" for="correo">Correo Corporativo *</label>
+                  <input type="email" id="correo" class="form-input" placeholder="Ej. contacto@empresa.com" required>
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label" for="ubicacion">Ubicación / Ciudad *</label>
-                  <input type="text" id="ubicacion" class="form-input" placeholder="Ej. San Luis Potosí (Carr. 57)" required>
+                  <label class="form-label" for="zonaInteres">Zona de Interés *</label>
+                  <select id="zonaInteres" class="form-select" required>
+                    <option value="San Luis Potosí y Colindancias">San Luis Potosí y Colindancias</option>
+                    <option value="Aguascalientes y Región">Aguascalientes y Región</option>
+                    <option value="Baja California Sur">Baja California Sur</option>
+                    <option value="Cobertura Regional / Occidente">Cobertura Regional / Occidente</option>
+                    <option value="Red Nacional Extendida">Red Nacional Extendida</option>
+                  </select>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="tipoSiniestro">Tipo de Siniestro</label>
-                <select id="tipoSiniestro" class="form-select">
-                  <option value="Colisión / Choque Vehicular">Colisión / Choque Vehicular</option>
-                  <option value="Transporte Pesado / Carga">Transporte Pesado / Carga</option>
-                  <option value="Transporte de Pasajeros">Transporte de Pasajeros</option>
-                  <option value="Daños a Terceros / Bienes">Daños a Terceros / Bienes</option>
-                  <option value="Robo / Asistencia Legal">Robo / Asistencia Legal</option>
-                  <option value="Investigación Pericial Especializada">Investigación Pericial Especializada</option>
+                <label class="form-label" for="solucionRequerida">Solución o Necesidad en Campo</label>
+                <select id="solucionRequerida" class="form-select">
+                  <option value="Ajuste de Siniestros en Sitio y Cabina">Ajuste de Siniestros en Sitio y Cabina</option>
+                  <option value="Investigación Pericial y Prevención de Fraude">Investigación Pericial y Prevención de Fraude</option>
+                  <option value="Soporte y Desborde Operativo Foráneo">Soporte y Desborde Operativo Foráneo</option>
+                  <option value="Atención Integral a Flotillas y Transporte Pesado">Atención Integral a Flotillas y Transporte Pesado</option>
+                  <option value="Integración Documental y Cuadernillos Periciales">Integración Documental y Cuadernillos Periciales</option>
+                  <option value="Alianza Estratégica Integral Multirramo">Alianza Estratégica Integral Multirramo</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="detalles">Detalles / Folio de Siniestro (Opcional)</label>
-                <textarea id="detalles" class="form-textarea" placeholder="Describe brevemente la situación, folio de reporte, referencias de ubicación o requerimientos..."></textarea>
+                <label class="form-label" for="mensaje">Requerimientos Específicos o Comentarios (Opcional)</label>
+                <textarea id="mensaje" class="form-textarea" placeholder="Indícanos volumen estimado de siniestros, requerimientos de cobertura o puntos clave de tu operación..."></textarea>
               </div>
 
-              <button type="submit" class="btn-send-whatsapp">
-                <i class="fa-brands fa-whatsapp"></i>
-                <span>Enviar reporte a WhatsApp DAREY</span>
+              <button type="submit" class="btn-send-partner">
+                <span>Enviar propuesta de colaboración por WhatsApp</span>
+                <span class="btn-partner-icon"><i class="fa-solid fa-arrow-right"></i></span>
               </button>
 
               <p class="form-note">
-                <i class="fa-solid fa-lock"></i> Al hacer clic, se abrirá WhatsApp con el reporte formateado para atención inmediata.
+                <i class="fa-solid fa-shield-halved"></i> Tu información se procesa confidencialmente para coordinar la sesión de enlace comercial.
               </p>
             </form>
           </div>
@@ -1591,7 +1577,7 @@ template = """<!DOCTYPE html>
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer id="contacto">
     <div class="container">
       <div class="footer-grid">
         <!-- Col 1: Brand Info -->
@@ -1599,13 +1585,12 @@ template = """<!DOCTYPE html>
           <!-- Embedded crisp high resolution transparent logo for dark background with white subtitle -->
           <img src="data:image/png;base64,__LOGO_DARK_B64__" alt="DAREY Ajustadores Profesionales S.C.">
           <p>
-            Soluciones profesionales en ajuste de siniestros. Experiencia, precisión técnica y trato humano protegiendo la imagen de nuestros socios.
+            Soluciones profesionales en ajuste de siniestros. Experiencia, precisión técnica y trato humano protegiendo la imagen de nuestros socios comerciales.
           </p>
           <div class="social-links">
             <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://wa.me/524440000000" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
         </div>
 
@@ -1616,9 +1601,10 @@ template = """<!DOCTYPE html>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#nosotros">Quiénes Somos</a></li>
             <li><a href="#valores">Pilares y Compromisos</a></li>
-            <li><a href="#proceso">Proceso de Ajuste</a></li>
+            <li><a href="#proceso">Proceso Operativo</a></li>
             <li><a href="#cobertura">Cobertura Regional</a></li>
             <li><a href="#socios">Socios Comerciales</a></li>
+            <li><a href="#alianza">Alianzas para Socios</a></li>
           </ul>
         </div>
 
@@ -1629,14 +1615,14 @@ template = """<!DOCTYPE html>
             <i class="fa-solid fa-shield-halved"></i>
             <div>
               <strong>DAREY Ajustadores Profesionales S.C.</strong>
-              <span>Ajuste de siniestros e investigación pericial</span>
+              <span>Soluciones en campo para el sector asegurador</span>
             </div>
           </div>
           <div class="footer-contact-item">
             <i class="fa-solid fa-location-dot"></i>
             <div>
               <strong>San Luis Potosí, S.L.P.</strong>
-              <span>Servicio local y foráneo en la región</span>
+              <span>Base central de coordinación regional</span>
             </div>
           </div>
           <div class="footer-contact-item">
@@ -1662,7 +1648,7 @@ template = """<!DOCTYPE html>
 
       <div class="footer-bottom">
         <p>&copy; 2026 DAREY Ajustadores Profesionales S.C. Todos los derechos reservados.</p>
-        <p>Identidad Gráfica Oficial · Profesionalismo en movimiento</p>
+        <p>Alianzas Estratégicas y Soluciones en Campo · San Luis Potosí</p>
       </div>
     </div>
   </footer>
@@ -1695,31 +1681,35 @@ template = """<!DOCTYPE html>
       });
     }
 
-    // Interactive WhatsApp message builder
-    function handleFormSubmit(event) {
+    // Interactive WhatsApp message builder for New B2B Partners
+    function handlePartnerSubmit(event) {
       event.preventDefault();
       
-      const nombre = document.getElementById('nombre').value.trim();
+      const nombre = document.getElementById('nombreContacto').value.trim();
+      const empresa = document.getElementById('empresa').value.trim();
+      const tipoOrg = document.getElementById('tipoOrganizacion').value;
       const telefono = document.getElementById('telefono').value.trim();
-      const aseguradora = document.getElementById('aseguradora').value;
-      const ubicacion = document.getElementById('ubicacion').value.trim();
-      const tipoSiniestro = document.getElementById('tipoSiniestro').value;
-      const detalles = document.getElementById('detalles').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const zona = document.getElementById('zonaInteres').value;
+      const solucion = document.getElementById('solucionRequerida').value;
+      const mensaje = document.getElementById('mensaje').value.trim();
 
       const phone = '524440000000';
 
-      let msg = '*🚨 SOLICITUD DE AJUSTADOR - DAREY S.C. 🚨*\\n';
+      let msg = '*🤝 NUEVA PROPUESTA DE ALIANZA - DAREY S.C. 🤝*\\n';
       msg += '━━━━━━━━━━━━━━━━━━━━\\n';
-      msg += '👤 *Reportante:* ' + nombre + '\\n';
+      msg += '👤 *Contacto:* ' + nombre + '\\n';
+      msg += '🏢 *Empresa:* ' + empresa + '\\n';
+      msg += '📌 *Giro / Organización:* ' + tipoOrg + '\\n';
       msg += '📞 *Teléfono:* ' + telefono + '\\n';
-      msg += '🏢 *Aseguradora/Empresa:* ' + aseguradora + '\\n';
-      msg += '📍 *Ubicación del Siniestro:* ' + ubicacion + '\\n';
-      msg += '🚗 *Tipo de Siniestro:* ' + tipoSiniestro + '\\n';
-      if (detalles) {
-        msg += '📝 *Detalles/Folio:* ' + detalles + '\\n';
+      msg += '✉️ *Correo:* ' + correo + '\\n';
+      msg += '📍 *Zona de Interés:* ' + zona + '\\n';
+      msg += '⚙️ *Solución Requerida:* ' + solucion + '\\n';
+      if (mensaje) {
+        msg += '📝 *Comentarios / Requerimientos:* ' + mensaje + '\\n';
       }
       msg += '━━━━━━━━━━━━━━━━━━━━\\n';
-      msg += '_Solicitud enviada desde portal web DAREY_';
+      msg += '_Solicitud de alianza recibida desde portal web DAREY_';
 
       const encodedMsg = encodeURIComponent(msg);
       const whatsappUrl = 'https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodedMsg;
@@ -1738,4 +1728,4 @@ output = output.replace('__ICON_B64__', b64_icon)
 with open('darey/index.html', 'w', encoding='utf-8') as f:
     f.write(output)
 
-print('Build script completed successfully. Size:', len(output))
+print('Build completed. Size:', len(output))
