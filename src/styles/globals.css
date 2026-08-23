@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================================
+   DAREY Integrador — Estilos Globales
+   Identidad visual DAREY Ajustadores Profesionales S.C.
+   ================================================================ */
+
+:root {
+  --azul-darey: #0089A9;
+  --azul-profundo: #005A82;
+  --azul-electrico: #0755E8;
+  --cian: #00B2CF;
+  --amarillo-darey: #F8C400;
+  --naranja: #F5A000;
+  --carbon: #202124;
+  --blanco: #FFFFFF;
+  --bg-light: #F4F9FB;
+  --bg-subtle: #EBF3F5;
+  --text-muted: #53626C;
+  --border-color: #D3E2E6;
+  --sidebar-width: 260px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  color: var(--carbon);
+  background-color: var(--bg-light);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Scrollbar personalizado ---- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-subtle); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--azul-darey); }
+
+/* ---- Badges de estado ---- */
+.badge {
+  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold;
+}
+.badge-pendiente    { @apply bg-gray-100 text-gray-600; }
+.badge-cargada      { @apply bg-blue-100 text-blue-700; }
+.badge-en-revision  { @apply bg-purple-100 text-purple-700; }
+.badge-observada    { @apply bg-amber-100 text-amber-700; }
+.badge-rechazada    { @apply bg-red-100 text-red-700; }
+.badge-validada     { @apply bg-green-100 text-green-700; }
+.badge-no-aplica    { @apply bg-slate-100 text-slate-600; }
+.badge-sustituida   { @apply bg-orange-100 text-orange-700; }
+
+/* Expediente status */
+.status-borrador         { @apply bg-gray-100 text-gray-600; }
+.status-asignado         { @apply bg-violet-100 text-violet-700; }
+.status-en-integracion   { @apply bg-blue-100 text-blue-700; }
+.status-listo-revision   { @apply bg-indigo-100 text-indigo-700; }
+.status-en-revision      { @apply bg-purple-100 text-purple-700; }
+.status-con-observaciones{ @apply bg-amber-100 text-amber-700; }
+.status-en-correccion    { @apply bg-orange-100 text-orange-700; }
+.status-reenviado        { @apply bg-cyan-100 text-cyan-700; }
+.status-validado         { @apply bg-green-100 text-green-700; }
+.status-cerrado          { @apply bg-emerald-100 text-emerald-800; }
+.status-bloqueado        { @apply bg-red-100 text-red-700; }
+.status-reabierto        { @apply bg-yellow-100 text-yellow-700; }
+
+/* ---- Semáforos de progreso ---- */
+.semaforo-rojo    { color: #DC2626; }
+.semaforo-amarillo{ color: #D97706; }
+.semaforo-verde   { color: #16A34A; }
+
+/* ---- Animaciones ---- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn { animation: fadeIn 0.25s ease-out; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+
+/* ---- Inputs DAREY ---- */
+.input-darey {
+  @apply w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-medium
+         focus:outline-none focus:ring-2 focus:ring-azul-darey/30 focus:border-azul-darey
+         placeholder:text-gray-400 bg-white transition-all duration-150;
+}
+
+.input-darey:disabled {
+  @apply bg-gray-50 text-gray-400 cursor-not-allowed;
+}
+
+/* ---- Botones ---- */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+         bg-azul-darey text-white text-sm font-semibold
+         hover:bg-azul-profundo transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-azul-darey/40
+         disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+         bg-white text-azul-profundo text-sm font-semibold border border-gray-200
+         hover:bg-bg-subtle hover:border-azul-darey/30 transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-azul-darey/20;
+}
+
+.btn-danger {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+         bg-red-600 text-white text-sm font-semibold
+         hover:bg-red-700 transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-red-400/40;
+}
+
+.btn-success {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+         bg-green-600 text-white text-sm font-semibold
+         hover:bg-green-700 transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-green-400/40;
+}
+
+.btn-warning {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+         bg-amber-500 text-white text-sm font-semibold
+         hover:bg-amber-600 transition-all duration-200;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg
+         text-sm font-medium text-text-muted
+         hover:bg-bg-subtle hover:text-carbon transition-all duration-200;
+}
+
+/* ---- Cards ---- */
+.card {
+  @apply bg-white rounded-xl border border-gray-100 shadow-card;
+}
+
+.card-hover {
+  @apply hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200;
+}
+
+/* ---- Slots de evidencia ---- */
+.slot-card {
+  @apply relative flex flex-col items-center justify-center
+         border-2 border-dashed border-gray-200 rounded-xl
+         min-h-[140px] cursor-pointer
+         hover:border-azul-darey/60 hover:bg-bg-subtle
+         transition-all duration-200;
+}
+
+.slot-card.filled {
+  @apply border-solid border-azul-darey/30 bg-bg-subtle;
+}
+
+.slot-card.validada {
+  @apply border-solid border-green-300 bg-green-50;
+}
+
+.slot-card.rechazada {
+  @apply border-solid border-red-300 bg-red-50;
+}
+
+.slot-card.observada {
+  @apply border-solid border-amber-300 bg-amber-50;
+}
+
+/* ---- Progreso ---- */
+.progress-bar {
+  @apply h-2 rounded-full overflow-hidden bg-gray-100;
+}
+.progress-fill {
+  @apply h-full rounded-full transition-all duration-500;
+}
+
+/* ---- Sidebar ---- */
+.sidebar-link {
+  @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+         text-slate-600 hover:bg-azul-darey/10 hover:text-azul-darey
+         transition-all duration-150 cursor-pointer;
+}
+.sidebar-link.active {
+  @apply bg-azul-darey/10 text-azul-darey font-semibold;
+}
+
+/* ---- Toasts / Alerts ---- */
+.alert-success { @apply flex items-center gap-2 p-3 rounded-lg bg-green-50 text-green-700 border border-green-200 text-sm; }
+.alert-warning { @apply flex items-center gap-2 p-3 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 text-sm; }
+.alert-error   { @apply flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 border border-red-200 text-sm; }
+.alert-info    { @apply flex items-center gap-2 p-3 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 text-sm; }
+
+/* ---- Modal overlay ---- */
+.modal-overlay {
+  @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+}
+.modal-content {
+  @apply bg-white rounded-2xl shadow-2xl w-full max-w-lg animate-fadeIn;
+}
+
+/* ---- Print / Export ---- */
+@media print {
+  .no-print { display: none !important; }
+}
