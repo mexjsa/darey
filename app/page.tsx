@@ -1,23 +1,362 @@
-const values = [
-  ['01', 'Arribo oportuno', 'Reducimos tiempos de respuesta porque sabemos que cada minuto cambia la percepción del asegurado.'],
-  ['02', 'Trato cercano', 'Un equipo técnicamente capaz, con alto enfoque al cliente y atención verdaderamente humana.'],
-  ['03', 'Investigación sólida', 'Documentamos cada caso con fotografías, evidencias y conclusiones claras para la compañía.'],
+const pillars = [
+  {
+    icon: 'fa-shield-halved',
+    title: 'Experiencia',
+    desc: 'Más de 35 años de trayectoria en el sector asegurador, garantizando criterio pericial certero y resolución efectiva de contingencias.'
+  },
+  {
+    icon: 'fa-user-check',
+    title: 'Confianza',
+    desc: 'Transparencia e integridad en la recopilación de testimonios, inspección documental y dictámenes técnicos claros e imparciales.'
+  },
+  {
+    icon: 'fa-gauge-high',
+    title: 'Agilidad',
+    desc: 'Arribo oportuno en sitio reduciendo tiempos de espera, porque sabemos que cada minuto define la satisfacción del asegurado.'
+  },
+  {
+    icon: 'fa-handshake',
+    title: 'Compromiso',
+    desc: 'Acompañamiento humano integral y protección constante de la imagen y prestigio de las aseguradoras asociadas.'
+  }
 ];
+
+const processes = [
+  {
+    num: '01',
+    title: 'Recepción y Contacto Inmediato',
+    desc: 'Recepción del folio, validación preliminar de póliza y cobertura, y llamada inmediata con el conductor o asegurado.'
+  },
+  {
+    num: '02',
+    title: 'Atención y Presencia en Sitio',
+    desc: 'Arribo puntual al lugar del siniestro, identificación de vehículos involucrados y asesoría presencial ante autoridades y terceros.'
+  },
+  {
+    num: '03',
+    title: 'Investigación y Evidencia Técnica',
+    desc: 'Levantamiento pericial, toma de declaraciones, registro fotográfico en alta resolución y análisis de dinámica del siniestro.'
+  },
+  {
+    num: '04',
+    title: 'Entrega Documentada & Cuadernillo',
+    desc: 'Integración rigurosa del cuadernillo digital con dictamen de responsabilidad para la pronta liquidación de la aseguradora.'
+  }
+];
+
 const regions = [
-  ['San Luis Potosí', 'Capital, sus 58 municipios y colindancias estratégicas.'],
-  ['Aguascalientes', 'Los 11 municipios y zonas limítrofes de Zacatecas y Jalisco.'],
-  ['Baja California Sur', 'La Paz, Los Cabos, Todos Santos, Constitución y Loreto.'],
-  ['Cobertura extendida', 'Presencia operativa en Colima, Tepic y atención nacional mediante nuestra red.'],
+  {
+    zone: 'ZONA 01',
+    title: 'San Luis Potosí',
+    desc: 'Capital del estado, zona metropolitana, sus 58 municipios y colindancias carreteras estratégicas.'
+  },
+  {
+    zone: 'ZONA 02',
+    title: 'Aguascalientes',
+    desc: 'Cobertura integral en los 11 municipios y corredores limítrofes con Zacatecas y Jalisco.'
+  },
+  {
+    zone: 'ZONA 03',
+    title: 'Baja California Sur',
+    desc: 'Presencia activa en La Paz, Los Cabos, Todos Santos, Ciudad Constitución y Loreto.'
+  },
+  {
+    zone: 'ZONA 04',
+    title: 'Red Nacional Extendida',
+    desc: 'Presencia operativa en Colima, Tepic y coordinación interestatal a través de nuestra red de ajustadores.'
+  }
 ];
+
+const partners = [
+  { name: 'Seguros Afirme', icon: 'fa-building-shield' },
+  { name: 'Más Soluciones', icon: 'fa-handshake-angle' },
+  { name: 'Movilidad Transporte Urbano & Colectivo', icon: 'fa-bus-simple' },
+  { name: 'Seguros El Águila', icon: 'fa-shield-halved' },
+  { name: 'General de Seguros', icon: 'fa-building-columns' },
+  { name: 'Grupo Zeus', icon: 'fa-award' }
+];
+
 export default function Home() {
-  return <main>
-    <header className="site-header"><a href="#inicio" aria-label="Inicio DAREY"><img src="/darey-logo.png" alt="DAREY Ajustadores Profesionales" /></a><nav aria-label="Navegación principal"><a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#cobertura">Cobertura</a><a className="nav-cta" href="#contacto">Contacto</a></nav></header>
-    <section className="hero" id="inicio"><div className="hero-image" aria-hidden="true"/><div className="hero-shade"/><div className="hero-content"><p className="eyebrow">Ajustadores profesionales · San Luis Potosí</p><h1>Respuesta oportuna.<br/><span>Atención humana.</span></h1><p className="hero-copy">Acompañamos cada siniestro con experiencia, claridad y atención cercana, cuidando la imagen de nuestros socios comerciales.</p><div className="hero-actions"><a className="button primary" href="#contacto">Solicitar atención</a><a className="button ghost" href="#nosotros">Conocer DAREY</a></div></div><div className="hero-stat"><strong>35</strong><span>años de experiencia respaldan nuestro trabajo</span></div></section>
-    <section className="intro section" id="nosotros"><div><p className="section-kicker">Quiénes somos</p><h2>Experiencia que se traduce en <em>confianza.</em></h2></div><div className="intro-copy"><p>DAREY es una empresa con más de seis años en el mercado asegurador, respaldada por 35 años de experiencia ofreciendo soluciones al sector.</p><p>Conocemos las necesidades de compañías y asegurados. Por eso, cada intervención combina atención profesional, comunicación clara y respeto por la imagen de nuestros socios.</p></div></section>
-    <section className="values section" aria-label="Nuestros compromisos">{values.map(([num,title,copy])=><article key={num}><span>{num}</span><h3>{title}</h3><p>{copy}</p></article>)}</section>
-    <section className="process" id="proceso"><div className="process-heading"><p className="section-kicker light">Nuestro proceso</p><h2>Del primer reporte a una conclusión bien sustentada.</h2></div><ol><li><b>01</b><div><h3>Recepción y contacto</h3><p>Recibimos el reporte, validamos la información y contactamos al asegurado.</p></div></li><li><b>02</b><div><h3>Atención en sitio</h3><p>Arribamos al lugar, identificamos unidades y damos acompañamiento ante la autoridad.</p></div></li><li><b>03</b><div><h3>Investigación</h3><p>Recabamos declaraciones, fotografías, documentos y evidencias necesarias.</p></div></li><li><b>04</b><div><h3>Entrega documentada</h3><p>Integramos el cuadernillo y presentamos conclusiones a la compañía de seguros.</p></div></li></ol></section>
-    <section className="coverage section" id="cobertura"><div className="coverage-head"><p className="section-kicker">Cobertura regional</p><h2>Cercanía operativa donde más se necesita.</h2><p>Una red preparada para atender siniestros en la región y responder a necesidades específicas de nuestros socios comerciales.</p></div><div className="region-grid">{regions.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
-    <section className="partners section"><p className="section-kicker">Experiencia compartida</p><h2>Relaciones construidas sobre resultados.</h2><p>DAREY ha colaborado con organizaciones como Más Soluciones, Seguros Afirme, Movilidad de Transporte Urbano y Colectivo Potosino, Grupo Zeus, Seguros El Águila y General de Seguros.</p></section>
-    <footer id="contacto"><div><img src="/darey-logo.png" alt="DAREY Ajustadores Profesionales"/><p>Atención profesional de siniestros desde San Luis Potosí.</p></div><div className="contact"><span>Contacto</span><h2>Alejandro<br/>Arellano Morán</h2><p>Dirección · DAREY Ajustadores Profesionales S.C.</p></div><a className="top" href="#inicio" aria-label="Volver al inicio">↑</a></footer>
-  </main>;
+  return (
+    <main>
+      {/* Floating WhatsApp */}
+      <a
+        href="https://wa.me/524440000000?text=Hola%20DAREY,%20requiero%20solicitar%20un%20ajustador"
+        className="floating-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contacto WhatsApp"
+      >
+        <i className="fa-brands fa-whatsapp"></i>
+        <span>Atención Inmediata</span>
+      </a>
+
+      {/* Header */}
+      <header className="site-header">
+        <div className="container header-inner">
+          <a href="#inicio" className="brand-logo" aria-label="Inicio DAREY">
+            <img src="/darey-logo-light.png" alt="DAREY Ajustadores Profesionales S.C." />
+          </a>
+          <nav className="nav-menu">
+            <a href="#inicio" className="nav-link">Inicio</a>
+            <a href="#nosotros" className="nav-link">Nosotros</a>
+            <a href="#valores" className="nav-link">Compromisos</a>
+            <a href="#proceso" className="nav-link">Proceso</a>
+            <a href="#cobertura" className="nav-link">Cobertura</a>
+            <a href="#socios" className="nav-link">Socios</a>
+            <a href="#contacto" className="btn-cta">
+              <span>Solicitar ajustador</span>
+              <span className="btn-icon-circle"><i className="fa-solid fa-chevron-right"></i></span>
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="hero-section" id="inicio">
+        <div className="hero-overlay"></div>
+        <div className="container hero-container">
+          <div className="hero-content">
+            <div className="badge-tagline">
+              <i className="fa-solid fa-shield-halved"></i> Profesionalismo en movimiento
+            </div>
+            <h1 className="hero-title">
+              Respuesta oportuna.<br />
+              <span className="highlight-cian">Atención humana.</span>
+            </h1>
+            <p className="hero-description">
+              En DAREY conectamos experiencia, precisión y confianza para brindar soluciones profesionales en ajuste de siniestros, cuidando en todo momento la imagen de nuestros socios comerciales.
+            </p>
+            <div className="hero-actions">
+              <a href="#contacto" className="btn-cta btn-yellow">
+                <span>Solicitar atención inmediata</span>
+                <span className="btn-icon-circle"><i className="fa-solid fa-arrow-right"></i></span>
+              </a>
+              <a href="#nosotros" className="btn-ghost">
+                <i className="fa-regular fa-compass"></i> Conocer DAREY
+              </a>
+            </div>
+          </div>
+
+          <div className="hero-card">
+            <div className="hero-stats-grid">
+              <div className="stat-box">
+                <div className="stat-number">35+</div>
+                <div className="stat-label">Años de experiencia combinada en el sector asegurador</div>
+              </div>
+              <div className="stat-box">
+                <div className="stat-number">24/7</div>
+                <div className="stat-label">Atención y coordinación inmediata en sitio</div>
+              </div>
+            </div>
+            <div className="hero-card-footer">
+              <img src="/darey-icon.jpg" alt="Icono DAREY" />
+              <div className="hero-card-footer-text">
+                <strong>Siniestros & Ajustes Especializados</strong>
+                San Luis Potosí, Aguascalientes, BCS y Red Nacional
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quienes Somos */}
+      <section className="section about-section" id="nosotros">
+        <div className="container">
+          <div className="about-grid">
+            <div>
+              <span className="section-kicker">Nuestra Identidad</span>
+              <h2 className="section-title">Experiencia que se traduce en <em>confianza y precisión.</em></h2>
+              <p className="section-subtitle" style={{ marginBottom: '24px' }}>
+                DAREY es una empresa con sólida trayectoria en el mercado asegurador, respaldada por más de 35 años de experiencia ofreciendo soluciones técnicas y periciales de alto nivel.
+              </p>
+              <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '24px' }}>
+                Entendemos a profundidad las exigencias de las compañías aseguradoras y las sensibilidades del asegurado. Por ello, cada intervención combina rigurosidad técnica, investigación objetiva, comunicación transparente y un respeto irrestricto por la reputación institucional de nuestros socios.
+              </p>
+            </div>
+
+            <div className="about-badge-card">
+              <p className="quote-box">
+                "En DAREY conectamos experiencia, precisión y confianza para brindar soluciones profesionales en ajuste de siniestros."
+              </p>
+              <div className="quote-author">DAREY Ajustadores Profesionales S.C.</div>
+              <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <img src="/darey-icon-circle.jpg" alt="DAREY Identidad" style={{ width: '54px', height: '54px', borderRadius: '50%' }} />
+                <div>
+                  <strong style={{ color: 'var(--azul-profundo)', display: 'block', fontSize: '15px' }}>Profesionalismo en movimiento</strong>
+                  <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Estándar de calidad pericial</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pilares */}
+      <section className="section pillars-section" id="valores">
+        <div className="container">
+          <div className="pillars-header">
+            <span className="section-kicker">Pilares Estratégicos</span>
+            <h2 className="section-title">Valores que guían cada <em>intervención</em></h2>
+            <p className="section-subtitle">Nuestra metodología de trabajo equilibra la eficiencia operativa con la calidez y la integridad pericial.</p>
+          </div>
+
+          <div className="pillars-grid">
+            {pillars.map((item, idx) => (
+              <div className="pillar-card" key={idx}>
+                <div className="pillar-icon-wrap">
+                  <i className={`fa-solid ${item.icon}`}></i>
+                </div>
+                <h3 className="pillar-title">{item.title}</h3>
+                <p className="pillar-desc">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Proceso */}
+      <section className="section process-section" id="proceso">
+        <div className="container">
+          <div className="process-grid">
+            <div className="process-heading">
+              <span className="section-kicker">Metodología Comprobada</span>
+              <h2 className="section-title">Del primer reporte a una conclusión bien sustentada.</h2>
+              <p className="section-subtitle">
+                Protocolos estandarizados que aseguran un flujo de información continuo, documentación fotográfica exhaustiva y certidumbre jurídica en cada expediente.
+              </p>
+              <a href="#contacto" className="btn-cta btn-yellow">
+                <span>Solicitar servicio pericial</span>
+                <span className="btn-icon-circle"><i className="fa-solid fa-chevron-right"></i></span>
+              </a>
+            </div>
+
+            <ol className="process-list">
+              {processes.map((step) => (
+                <li className="process-item" key={step.num}>
+                  <span className="process-number">{step.num}</span>
+                  <div className="process-info">
+                    <h3>{step.title}</h3>
+                    <p>{step.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* Cobertura */}
+      <section className="section coverage-section" id="cobertura">
+        <div className="container">
+          <div className="coverage-grid">
+            <div className="coverage-head">
+              <span className="section-kicker">Presencia Operativa</span>
+              <h2 className="section-title">Cercanía y respuesta <em>donde más se necesita.</em></h2>
+              <p className="section-subtitle" style={{ marginBottom: '24px' }}>
+                Contamos con base operativa estratégica y una red de ajustadores periciales preparados para responder con máxima prontitud.
+              </p>
+            </div>
+
+            <div className="region-cards-container">
+              {regions.map((reg) => (
+                <article className="region-card" key={reg.zone}>
+                  <span className="region-num">{reg.zone}</span>
+                  <h3 className="region-title"><i className="fa-solid fa-location-dot"></i> {reg.title}</h3>
+                  <p className="region-desc">{reg.desc}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Socios */}
+      <section className="section partners-section" id="socios">
+        <div className="container">
+          <span className="section-kicker">Experiencia Compartida</span>
+          <h2 className="section-title">Relaciones sólidas construidas sobre <em>resultados.</em></h2>
+          <div className="partners-list-pill">
+            {partners.map((p, i) => (
+              <div className="partner-tag" key={i}>
+                <i className={`fa-solid ${p.icon}`}></i> {p.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer id="contacto">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <img src="/darey-logo-dark.png" alt="DAREY Ajustadores Profesionales S.C." />
+              <p>
+                Soluciones profesionales en ajuste de siniestros. Experiencia, precisión técnica y trato humano protegiendo la imagen de nuestros socios.
+              </p>
+              <div className="social-links">
+                <a href="#" className="social-btn" aria-label="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
+                <a href="#" className="social-btn" aria-label="Instagram"><i className="fa-brands fa-instagram"></i></a>
+                <a href="#" className="social-btn" aria-label="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://wa.me/524440000000" className="social-btn" aria-label="WhatsApp"><i className="fa-brands fa-whatsapp"></i></a>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="footer-title">Enlaces Rápidos</h4>
+              <ul className="footer-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Quiénes Somos</a></li>
+                <li><a href="#valores">Pilares y Compromisos</a></li>
+                <li><a href="#proceso">Proceso de Ajuste</a></li>
+                <li><a href="#cobertura">Cobertura Regional</a></li>
+                <li><a href="#socios">Socios Comerciales</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="footer-title">Contacto Directo</h4>
+              <div className="footer-contact-item">
+                <i className="fa-solid fa-user-tie"></i>
+                <div>
+                  <strong>Alejandro Arellano Morán</strong>
+                  <span>Dirección General · DAREY</span>
+                </div>
+              </div>
+              <div className="footer-contact-item">
+                <i className="fa-solid fa-location-dot"></i>
+                <div>
+                  <strong>San Luis Potosí, S.L.P.</strong>
+                  <span>Servicio local y foráneo en la región</span>
+                </div>
+              </div>
+              <div className="footer-contact-item">
+                <i className="fa-solid fa-envelope"></i>
+                <div>
+                  <strong>contacto@darey.com.mx</strong>
+                  <span>Atención a aseguradoras y socios</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+              <div>
+                <h4 className="footer-title">Lema</h4>
+                <p style={{ color: 'var(--cian)', fontWeight: 700, fontSize: '14px' }}>Profesionalismo en movimiento.</p>
+              </div>
+              <a href="#inicio" className="back-to-top" aria-label="Volver arriba">
+                <i className="fa-solid fa-arrow-up"></i>
+              </a>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <p>&copy; 2026 DAREY Ajustadores Profesionales S.C. Todos los derechos reservados.</p>
+            <p>Identidad Gráfica Oficial · Desarrollado con altos estándares de calidad</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
 }
