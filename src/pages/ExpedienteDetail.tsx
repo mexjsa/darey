@@ -99,7 +99,17 @@ function DispatchCard({ exp }: { exp: Expediente }) {
           </span>
           <div className="text-xs space-y-1">
             <div><strong>Vehículo:</strong> {exp.vehiculo_asegurado.placas} · {exp.vehiculo_asegurado.color || ''} {exp.vehiculo_asegurado.marca || ''} {exp.vehiculo_asegurado.modelo || ''}</div>
-            <div><strong>Asegurado:</strong> {exp.asegurado.nombre} {exp.asegurado.telefono ? `(${exp.asegurado.telefono})` : ''}</div>
+            <div>
+              <strong>Asegurado:</strong> {exp.asegurado.nombre}
+              {exp.asegurado.telefono && (
+                <a
+                  href={`tel:${exp.asegurado.telefono}`}
+                  className="inline-flex items-center gap-1 text-azul-darey font-bold ml-1.5 px-2 py-0.5 bg-white rounded border border-azul-darey/30 hover:bg-azul-darey hover:text-white transition-all shadow-xs"
+                >
+                  <Phone className="w-3 h-3" /> Llamar: {exp.asegurado.telefono}
+                </a>
+              )}
+            </div>
             {exp.reporte?.numero_reporte && <div><strong>Folio Reporte:</strong> {exp.reporte.numero_reporte}</div>}
             {exp.reporte?.contacto_aseguradora && <div><strong>Contacto Aseguradora:</strong> {exp.reporte.contacto_aseguradora}</div>}
           </div>
@@ -688,7 +698,7 @@ function BloqueSection({
   const pctFill = totalSlots > 0 ? Math.round(filledSlots / bComps.length * 100) : 0;
 
   return (
-    <div className="card overflow-hidden">
+    <div id={`bloque-${bloque.id}`} className="card overflow-hidden scroll-mt-24">
       <button
         className="w-full flex items-center justify-between px-4 py-3 hover:bg-bg-subtle transition-colors"
         onClick={() => setOpen(v => !v)}
@@ -750,7 +760,7 @@ function BloqueSection({
 export default function ExpedienteDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { currentUser, expedientes } = useStore();
+  const { currentUser, expedientes, iniciarIntegracion, sendToReview } = useStore();
   const [tab, setTab] = useState<'integrador' | 'datos' | 'historial'>('integrador');
 
   const exp = expedientes.find(e => e.id === id);
@@ -774,7 +784,7 @@ export default function ExpedienteDetail() {
   });
 
   return (
-    <div className="p-4 lg:p-6 space-y-4 animate-fadeIn">
+    <div className="p-4 lg:p-6 space-y-4 animate-fadeIn pb-28 lg:pb-6">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-text-muted">
         <button onClick={() => navigate('/expedientes')} className="hover:text-azul-darey transition-colors flex items-center gap-1">
@@ -791,12 +801,12 @@ export default function ExpedienteDetail() {
       <ExpedienteHeader exp={exp} />
 
       {/* Tabs */}
-      <div className="flex gap-1 border-b border-gray-100">
+      <div className="flex gap-1 border-b border-gray-100 overflow-x-auto no-scrollbar">
         {(['integrador', 'datos', 'historial'] as const).map(t => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`px-4 py-2.5 text-sm font-semibold transition-colors capitalize border-b-2 -mb-px ${
+            className={`px-4 py-2.5 text-sm font-semibold transition-colors capitalize border-b-2 -mb-px whitespace-nowrap shrink-0 ${
               tab === t ? 'border-azul-darey text-azul-darey' : 'border-transparent text-text-muted hover:text-carbon'
             }`}
           >
@@ -804,6 +814,27 @@ export default function ExpedienteDetail() {
           </button>
         ))}
       </div>
+
+      {/* Selector Rápido de Bloques (Mobile-friendly jump bar) */}
+      {tab === 'integrador' && (
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 no-scrollbar -mx-1 px-1">
+          <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider shrink-0 hidden sm:inline">
+            Ir a:
+          </span>
+          {BLOQUES.filter(b => b.id !== 5 || exp.tiene_tercero).map(b => (
+            <a
+              key={b.id}
+              href={`#bloque-${b.id}`}
+              className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-bold text-carbon whitespace-nowrap shadow-xs hover:border-azul-darey hover:text-azul-darey transition-all shrink-0 flex items-center gap-1.5"
+            >
+              <span className="w-4 h-4 rounded-full bg-azul-darey/10 text-azul-darey text-[10px] flex items-center justify-center font-bold">
+                {b.id}
+              </span>
+              <span>Bloque {b.id}</span>
+            </a>
+          ))}
+        </div>
+      )}
 
       {/* Tab content */}
       {tab === 'integrador' && (
@@ -927,6 +958,39 @@ export default function ExpedienteDetail() {
           </div>
         </div>
       )}
+
+      {/* Mobile Floating Action Bar (Optimizado para campo) */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-3 z-30 shadow-2xl flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-azul-darey text-white flex items-center justify-center font-bold text-xs shadow-sm">
+            {exp.integration_percent}%
+          </div>
+          <div className="text-[11px] leading-tight">
+            <div className="font-bold text-carbon">Integración</div>
+            <div className="text-text-muted">{expedienteStatusLabel(exp.status)}</div>
+          </div>
+        </div>
+
+        {exp.status === 'ASIGNADO' && exp.assigned_to === currentUser?.id ? (
+          <button
+            onClick={() => iniciarIntegracion(exp.id)}
+            className="btn-primary text-xs py-2.5 px-4 flex items-center gap-1.5 shadow"
+          >
+            <CheckCircle className="w-4 h-4" /> Iniciar Integración
+          </button>
+        ) : (!isLocked && (exp.assigned_to === currentUser?.id || isRevisor(currentUser?.role || '')) && ['BORRADOR', 'EN_INTEGRACION', 'CON_OBSERVACIONES', 'EN_CORRECCION'].includes(exp.status)) ? (
+          <button
+            onClick={() => {
+              if (window.confirm('¿Enviar expediente a revisión?')) {
+                sendToReview(exp.id);
+              }
+            }}
+            className="btn-primary text-xs py-2.5 px-4 flex items-center gap-1.5 shadow"
+          >
+            <Send className="w-4 h-4" /> Enviar a revisión
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }
