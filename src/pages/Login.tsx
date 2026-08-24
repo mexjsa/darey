@@ -122,18 +122,6 @@ export default function Login() {
                   {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
                   {loading ? 'Verificando...' : 'Iniciar sesión'}
                 </button>
-
-                {/* Demo credentials hint */}
-                <details className="text-xs text-text-muted border border-dashed border-gray-200 rounded-lg p-3">
-                  <summary className="cursor-pointer font-semibold text-azul-darey">Credenciales de demo</summary>
-                  <div className="mt-2 space-y-1 font-mono">
-                    <div>SUPER-ADMIN / admin123</div>
-                    <div>AJUSTADOR-01 / ajust123</div>
-                    <div>AJUSTADOR-02 / ajust123</div>
-                    <div>REVISOR-01 / rev123</div>
-                    <div>COORDINADOR / coord123</div>
-                  </div>
-                </details>
               </form>
             )}
 
@@ -193,10 +181,6 @@ export default function Login() {
                     onChange={e => setTotp(e.target.value.replace(/\D/g, '').slice(0, 6))}
                     autoFocus
                   />
-                </div>
-
-                <div className="alert-info text-xs">
-                  <div><strong>Demo:</strong> ingresa cualquier 6 dígitos (ej. <span className="font-mono">123456</span>)</div>
                 </div>
 
                 <button type="submit" className="btn-primary w-full py-2.5" disabled={loading}>
