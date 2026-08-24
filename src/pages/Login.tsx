@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '@/store';
 import { Shield, Eye, EyeOff, Lock, Smartphone, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import { DAREY_ICON_CIRCLE } from '@/assets/logo';
 
 // ================================================================
 // Pantalla de Login — DAREY Integrador
@@ -51,7 +52,7 @@ export default function Login() {
           <div className="bg-gradient-to-r from-azul-profundo to-azul-darey px-8 py-6 text-center">
             <div className="flex justify-center mb-3">
               <img
-                src="/darey-icon-circle.jpg"
+                src={DAREY_ICON_CIRCLE}
                 alt="Logo DAREY"
                 className="w-16 h-16 rounded-full object-cover shadow-lg border-2 border-white/80 bg-white"
               />

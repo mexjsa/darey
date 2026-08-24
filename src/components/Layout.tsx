@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useStore } from '@/store';
 import { roleLabel } from '@/utils/helpers';
+import { DAREY_ICON_CIRCLE } from '@/assets/logo';
 import {
   LayoutDashboard, FolderOpen, ClipboardList, Users, Settings,
   LogOut, Shield, ChevronLeft, ChevronRight, Bell, Wifi, WifiOff,
@@ -58,7 +59,7 @@ export default function AppLayout({ children }: LayoutProps) {
       <div className="px-4 py-5 border-b border-gray-100">
         <div className="flex items-center gap-3">
           <img
-            src="/darey-icon-circle.jpg"
+            src={DAREY_ICON_CIRCLE}
             alt="DAREY"
             className="w-10 h-10 rounded-full object-cover shadow-sm shrink-0 border border-gray-100"
           />
