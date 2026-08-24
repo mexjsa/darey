@@ -827,6 +827,30 @@ template = """<!DOCTYPE html>
       line-height: 1.5;
     }
 
+    /* Enlace discreto para el Integrador Documental */
+    .integrador-link-subtle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      transition: all 0.25s ease;
+    }
+
+    .integrador-link-subtle:hover {
+      color: var(--amarillo-darey);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--amarillo-darey);
+      transform: translateX(2px);
+    }
+
     .partner-form-card {
       background: var(--blanco);
       border-radius: 20px;
@@ -1474,6 +1498,11 @@ template = """<!DOCTYPE html>
               <div class="solution-text">
                 <strong>Investigación Técnica y Cuadernillos Digitales</strong>
                 <span>Dictámenes con sustento pericial, levantamiento fotográfico y entrega de expedientes debidamente fundamentados.</span>
+                <div>
+                  <a href="./integrador/" class="integrador-link-subtle" title="Acceso al Integrador Documental para socios y empleados">
+                    <i class="fa-solid fa-folder-open"></i> Acceso a Integrador Documental &rarr;
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -1605,6 +1634,7 @@ template = """<!DOCTYPE html>
             <li><a href="#cobertura">Cobertura Regional</a></li>
             <li><a href="#socios">Socios Comerciales</a></li>
             <li><a href="#alianza">Alianzas para Socios</a></li>
+            <li><a href="./integrador/" style="font-size: 13px; opacity: 0.8;"><i class="fa-solid fa-lock" style="font-size: 11px; margin-right: 5px;"></i> Integrador Documental</a></li>
           </ul>
         </div>
 
@@ -1728,4 +1758,4 @@ output = output.replace('__ICON_B64__', b64_icon)
 with open('darey/index.html', 'w', encoding='utf-8') as f:
     f.write(output)
 
-print('Build completed. Size:', len(output))
+print('Build completed with subtle integrador link. Size:', len(output))
