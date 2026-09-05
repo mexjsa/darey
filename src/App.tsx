@@ -26,10 +26,18 @@ export default function App() {
   return (
     <HashRouter>
       <Routes>
-        {/* Public */}
+        {/* Public Tenant-Isolated Logins */}
         <Route
           path="/login"
           element={authStep === 'authenticated' ? <Navigate to="/" replace /> : <Login />}
+        />
+        <Route
+          path="/t/:slug/login"
+          element={authStep === 'authenticated' ? <Navigate to="/" replace /> : <Login />}
+        />
+        <Route
+          path="/nexos/login"
+          element={authStep === 'authenticated' ? <Navigate to="/nexos-admin" replace /> : <Login isMasterPortal />}
         />
 
         {/* Protected Core */}

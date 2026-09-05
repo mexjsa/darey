@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useStore } from '@/store';
 import { Shield, Eye, EyeOff, Lock, Smartphone, CheckCircle, AlertCircle, RefreshCw, Building2, Sparkles } from 'lucide-react';
 
-export default function Login() {
+interface LoginProps {
+  isMasterPortal?: boolean;
+}
+
+export default function Login({ isMasterPortal }: LoginProps) {
+  const { slug } = useParams<{ slug?: string }>();
   const {
     loginWithPassword,
     verifyTOTP,
@@ -14,6 +20,15 @@ export default function Login() {
     currentTenantId,
     switchTenant
   } = useStore();
+
+  useEffect(() => {
+    if (slug) {
+      const found = tenants.find(t => t.slug === slug.toLowerCase() || t.id === slug);
+      if (found) {
+        switchTenant(found.id);
+      }
+    }
+  }, [slug, tenants, switchTenant]);
 
   const currentTenant = getCurrentTenant();
   const [username, setUsername] = useState('');
@@ -33,24 +48,28 @@ export default function Login() {
 
   const handleTOTP = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (totp.length !== 6) { setTotpError('El codigo debe tener 6 dogitos'); return; }
+    if (totp.length !== 6) { setTotpError('El código debe tener 6 dígitos'); return; }
     setLoading(true);
     setTotpError('');
     const ok = await verifyTOTP(totp);
     setLoading(false);
     if (!ok) {
-      setTotpError('Codigo incorrecto o expirado');
+      setTotpError('Código incorrecto o expirado');
       setTotp('');
     } else {
       setSuccess(true);
     }
   };
 
+  const isMaster = isMasterPortal || username.toUpperCase() === 'SUPER-NEXOS';
+
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative"
       style={{
-        background: `linear-gradient(135deg, ${currentTenant.secondary_color} 0%, ${currentTenant.primary_color} 100%)`
+        background: isMaster
+          ? 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)'
+          : `linear-gradient(135deg, ${currentTenant.secondary_color} 0%, ${currentTenant.primary_color} 100%)`
       }}
     >
       {/* Background Pattern */}
@@ -60,40 +79,26 @@ export default function Login() {
       />
 
       <div className="relative w-full max-w-md">
-        {/* Tenant Quick Switcher Pills for Demo */}
-        <div className="mb-4 flex items-center justify-center gap-2 flex-wrap">
-          <span className="text-[11px] font-semibold text-white/80 bg-black/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
-            ?? Despacho:
-          </span>
-          {tenants.map(t => (
-            <button
-              key={t.id}
-              onClick={() => switchTenant(t.id)}
-              className={`text-xs px-3 py-1 rounded-full font-medium transition-all backdrop-blur-sm ${
-                currentTenantId === t.id
-                  ? 'bg-white text-slate-900 shadow-md font-bold'
-                  : 'bg-white/20 text-white hover:bg-white/30'
-              }`}
-            >
-              {t.short_name}
-            </button>
-          ))}
-        </div>
-
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/20">
           {/* Header */}
           <div
             className="px-8 py-6 text-center text-white relative"
             style={{
-              background: `linear-gradient(to right, ${currentTenant.secondary_color}, ${currentTenant.primary_color})`
+              background: isMaster
+                ? 'linear-gradient(to right, #0f172a, #312e81)'
+                : `linear-gradient(to right, ${currentTenant.secondary_color}, ${currentTenant.primary_color})`
             }}
           >
             <div className="flex justify-center mb-3">
               <div
                 className="w-16 h-16 rounded-2xl shadow-lg border-2 border-white/80 bg-white flex items-center justify-center overflow-hidden"
               >
-                {currentTenant.logo_url ? (
+                {isMaster ? (
+                  <div className="w-full h-full bg-slate-900 flex items-center justify-center text-indigo-400">
+                    <Sparkles className="w-8 h-8" />
+                  </div>
+                ) : currentTenant.logo_url ? (
                   <img
                     src={currentTenant.logo_url}
                     alt={currentTenant.short_name}
@@ -104,9 +109,15 @@ export default function Login() {
                 )}
               </div>
             </div>
-            <h1 className="text-xl font-bold tracking-wide">{currentTenant.short_name}</h1>
-            <p className="text-white/90 text-sm font-medium mt-0.5">Integrador Documental de Campo</p>
-            <p className="text-white/70 text-[11px] mt-0.5 font-normal">{currentTenant.name}</p>
+            <h1 className="text-xl font-bold tracking-wide">
+              {isMaster ? 'NEXOS CORE' : currentTenant.short_name}
+            </h1>
+            <p className="text-white/90 text-sm font-medium mt-0.5">
+              {isMaster ? 'Consola Maestra de Operador SaaS' : 'Integrador Documental de Campo'}
+            </p>
+            <p className="text-white/70 text-[11px] mt-0.5 font-normal">
+              {isMaster ? 'Plataforma Multi-Inquilino' : currentTenant.name}
+            </p>
           </div>
 
           {/* Form Content */}
@@ -168,7 +179,7 @@ export default function Login() {
                   ) : (
                     <>
                       <Lock className="w-4 h-4" />
-                      Iniciar Sesion
+                      Iniciar Sesión
                     </>
                   )}
                 </button>
@@ -181,9 +192,9 @@ export default function Login() {
                   <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Smartphone className="w-6 h-6 text-indigo-600" />
                   </div>
-                  <h3 className="font-bold text-slate-900 text-base">Verificacion 2FA Requerida</h3>
+                  <h3 className="font-bold text-slate-900 text-base">Verificación 2FA Requerida</h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Ingresa el codigo de 6 dogitos de tu aplicacion autenticadora.
+                    Ingresa el código de 6 dígitos de tu aplicación autenticadora.
                   </p>
                 </div>
 
@@ -239,15 +250,17 @@ export default function Login() {
           </div>
 
           {/* Footer Powered By NEXOS */}
-          <div className="px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-            <span className="flex items-center gap-1">
-              <Shield className="w-3.5 h-3.5 text-indigo-500" />
-              Cifrado AES-256 + SHA-256
-            </span>
-            <span className="font-semibold text-slate-600 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-indigo-500" />
+          <div className="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-center text-xs">
+            <a
+              href="https://nexos-ia.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-slate-500 hover:text-indigo-600 flex items-center gap-1.5 transition-colors"
+              title="Visitar NEXOS IA"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
               Powered by NEXOS IA
-            </span>
+            </a>
           </div>
         </div>
       </div>
