@@ -114,29 +114,29 @@ export default function AppLayout({ children }: LayoutProps) {
           </>
         )}
 
-        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 font-semibold">Operación</p>}
+        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 font-semibold">OperaciÃ³n</p>}
         <NavItem to="/" icon={LayoutDashboard} label="Dashboard" />
         <NavItem to="/expedientes" icon={FolderOpen} label="Expedientes" />
 
         {isReviewRole && (
           <>
-            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Revisión & Control</p>}
-            <NavItem to="/revision" icon={ClipboardList} label="Cola de revisión" badge={pendingRevision} />
+            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">RevisiÃ³n & Control</p>}
+            <NavItem to="/revision" icon={ClipboardList} label="Cola de revisiÃ³n" badge={pendingRevision} />
             <NavItem to="/matriz" icon={FileCheck} label="Matriz pericial" />
           </>
         )}
 
         {isAdmin && (
           <>
-            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Administración</p>}
+            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">AdministraciÃ³n</p>}
             <NavItem to="/admin/usuarios" icon={Users} label="Usuarios & Licencias" />
-            <NavItem to="/admin/auditoria" icon={BarChart3} label="Bitácora (Audit)" />
-            <NavItem to="/admin/config" icon={Settings} label="Configuración" />
+            <NavItem to="/admin/auditoria" icon={BarChart3} label="BitÃ¡cora (Audit)" />
+            <NavItem to="/admin/config" icon={Settings} label="ConfiguraciÃ³n" />
           </>
         )}
 
-        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Ayuda & Guías</p>}
-        <NavItem to="/manual" icon={BookOpen} label="Manual de Operación" />
+        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Ayuda & GuÃ­as</p>}
+        <NavItem to="/manual" icon={BookOpen} label="Manual de OperaciÃ³n" />
       </nav>
 
       {/* User Info Footer */}
@@ -160,7 +160,7 @@ export default function AppLayout({ children }: LayoutProps) {
           className="sidebar-link w-full mt-1 text-red-500 hover:text-red-600 hover:bg-red-50"
         >
           <LogOut className="w-4 h-4 shrink-0" />
-          {!collapsed && 'Cerrar sesión'}
+          {!collapsed && 'Cerrar sesiÃ³n'}
         </button>
       </div>
     </div>
@@ -233,12 +233,12 @@ export default function AppLayout({ children }: LayoutProps) {
           {isOffline ? (
             <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-amber-200 rounded-full">
               <WifiOff className="w-3.5 h-3.5 text-amber-600" />
-              <span className="text-xs font-semibold text-amber-700">Sin conexión</span>
+              <span className="text-xs font-semibold text-amber-700">Sin conexiÃ³n</span>
             </div>
           ) : (
             <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green-50 border border-green-200 rounded-full">
               <Wifi className="w-3.5 h-3.5 text-green-600" />
-              <span className="text-xs font-semibold text-green-700">En línea</span>
+              <span className="text-xs font-semibold text-green-700">En lâ€¢nea</span>
             </div>
           )}
 
@@ -253,7 +253,7 @@ export default function AppLayout({ children }: LayoutProps) {
 
           <div className="text-xs text-text-muted hidden sm:block">
             <span className="font-semibold text-carbon">{currentUser.username}</span>
-            <span className="mx-1">·</span>
+            <span className="mx-1">â€¢</span>
             {roleLabel(currentUser.role)}
           </div>
         </header>

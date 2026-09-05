@@ -90,9 +90,9 @@ export default function Administracion() {
               Despacho Inquilino: {currentTenant.short_name}
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">AdministraciÛn & Licenciamiento</h1>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Administraci√≥n & Licenciamiento</h1>
           <p className="text-xs sm:text-sm text-slate-500">
-            Control de usuarios activos, auditorÌa legal y almacenamiento jer·rquico L3
+            Control de usuarios activos, auditor√≠a legal y almacenamiento jer√°rquico L3
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default function Administracion() {
           <span className="flex items-center gap-1.5"><Users className="w-4 h-4" /> Usuarios & Licencias</span>
         </TabButton>
         <TabButton active={tab === 'auditoria'} onClick={() => setTab('auditoria')}>
-          <span className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4" /> Bit·cora de AuditorÌa (SIEM)</span>
+          <span className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4" /> Bit√°cora de Auditor‚Ä¢a (SIEM)</span>
         </TabButton>
         <TabButton active={tab === 'seguridad'} onClick={() => setTab('seguridad')}>
           <span className="flex items-center gap-1.5"><Shield className="w-4 h-4" /> Seguridad & Almacenamiento L3</span>
@@ -149,7 +149,7 @@ export default function Administracion() {
                     <th className="px-6 py-3.5">Rol Operativo</th>
                     <th className="px-6 py-3.5">2FA / Seguridad</th>
                     <th className="px-6 py-3.5">Estado Asiento</th>
-                    <th className="px-6 py-3.5 text-right">AcciÛn</th>
+                    <th className="px-6 py-3.5 text-right">Acci√≥n</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -272,11 +272,11 @@ export default function Administracion() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">ContraseÒa Inicial *</label>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Contrase√±a Inicial *</label>
                     <input
                       type="password"
                       className="w-full px-3.5 py-2 border rounded-xl text-slate-900 text-xs"
-                      placeholder="ïïïïïïïï"
+                      placeholder="‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢"
                       value={newUser.password}
                       onChange={e => setNewUser(p => ({ ...p, password: e.target.value }))}
                     />
@@ -304,12 +304,12 @@ export default function Administracion() {
         </div>
       )}
 
-      {/* AUDITORÕA */}
+      {/* AUDITOR√çA */}
       {tab === 'auditoria' && (
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
             <div>
-              <h2 className="text-sm font-bold text-slate-900">Registro de AuditorÌa Legal (SEC-014)</h2>
+              <h2 className="text-sm font-bold text-slate-900">Registro de Auditor‚Ä¢a Legal (SEC-014)</h2>
               <p className="text-xs text-slate-500">Trazabilidad inmutable de accesos, cargas y validaciones</p>
             </div>
             <span className="text-xs font-mono text-slate-500 bg-white px-2.5 py-1 border rounded-md">
@@ -348,23 +348,23 @@ export default function Administracion() {
                 <HardDrive className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-slate-900">Almacenamiento Jer·rquico</h3>
-                <p className="text-xs text-slate-500">GestiÛn de costos y retenciÛn de fotografÌas</p>
+                <h3 className="text-base font-bold text-slate-900">Almacenamiento Jer√°rquico</h3>
+                <p className="text-xs text-slate-500">Gesti√≥n de costos y retenci√≥n de fotograf√≠as</p>
               </div>
             </div>
 
             <div className="space-y-3 text-xs text-slate-700">
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
                 <div>
-                  <div className="font-bold text-slate-900">?? Hot Tier (0-60 dÌas)</div>
-                  <div className="text-slate-500">Expedientes activos en campo y revisiÛn</div>
+                  <div className="font-bold text-slate-900">?? Hot Tier (0-60 d√≠as)</div>
+                  <div className="text-slate-500">Expedientes activos en campo y revisi√≥n</div>
                 </div>
                 <span className="font-bold text-emerald-700">Cloudflare R2</span>
               </div>
 
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
                 <div>
-                  <div className="font-bold text-slate-900">?? Warm Tier (60 dÌas - 1 aÒo)</div>
+                  <div className="font-bold text-slate-900">?? Warm Tier (60 d√≠as - 1 a√±o)</div>
                   <div className="text-slate-500">Expedientes validados y sellados</div>
                 </div>
                 <span className="font-bold text-blue-700">PDF Sellado R2</span>
@@ -372,8 +372,8 @@ export default function Administracion() {
 
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
                 <div>
-                  <div className="font-bold text-slate-900">?? Cold Archive (1 - 10 aÒos)</div>
-                  <div className="text-slate-500">Archivo legal histÛrico comprimido</div>
+                  <div className="font-bold text-slate-900">?? Cold Archive (1 - 10 a√±os)</div>
+                  <div className="text-slate-500">Archivo legal hist‚Ä¢rico comprimido</div>
                 </div>
                 <span className="font-bold text-indigo-700">Glacier Deep Archive</span>
               </div>
@@ -404,14 +404,14 @@ export default function Administracion() {
                 <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
                 <div>
                   <div className="font-bold text-indigo-950">Cadena de Custodia SHA-256 (SEC-009)</div>
-                  <div className="text-indigo-800">Cada foto genera un checksum criptogr·fico inmutable.</div>
+                  <div className="text-indigo-800">Cada foto genera un checksum criptogr√°fico inmutable.</div>
                 </div>
               </div>
 
               <div className="flex items-start gap-2.5 p-2.5 bg-indigo-50/50 rounded-xl border border-indigo-100">
                 <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-bold text-indigo-950">Marca de Agua Pericial Din·mica (SEC-013)</div>
+                  <div className="font-bold text-indigo-950">Marca de Agua Pericial Din√°mica (SEC-013)</div>
                   <div className="text-indigo-800">Sello con: {currentTenant.watermark_text}</div>
                 </div>
               </div>

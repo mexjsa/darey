@@ -1,6 +1,6 @@
 // ================================================================
-// NEXOS Master Console ó Panel Super Administrador SaaS
-// SupervisiÛn global de despachos inquilinos, licencias y MRR
+// NEXOS Master Console ‚Ä¢ Panel Super Administrador SaaS
+// Supervisi√≥n global de despachos inquilinos, licencias y MRR
 // ================================================================
 
 import React, { useState } from 'react';
@@ -139,13 +139,13 @@ export const NexosMasterConsole: React.FC = () => {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/20 border border-indigo-400/30 rounded-full text-indigo-300 text-xs font-semibold mb-3">
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            NEXOS CORE PLATFORM ï SaaS Multi-Inquilino v2.0
+            NEXOS CORE PLATFORM ‚Ä¢ SaaS Multi-Inquilino v2.0
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3">
             Consola Maestra de Despachos
           </h1>
           <p className="text-slate-300 text-sm mt-1.5 max-w-2xl">
-            GestiÛn centralizada de despachos periciales inquilinos, control de licenciamiento por asiento (per-seat), cobro recurrente e infraestructura segura L3.
+            Gesti√≥n centralizada de despachos periciales inquilinos, control de licenciamiento por asiento (per-seat), cobro recurrente e infraestructura segura L3.
           </p>
         </div>
 
@@ -166,7 +166,7 @@ export const NexosMasterConsole: React.FC = () => {
           <div>
             <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Despachos Inquilinos</p>
             <h3 className="text-2xl font-bold text-slate-900 mt-1">{totalTenants}</h3>
-            <p className="text-xs text-emerald-600 font-medium mt-0.5">{activeTenants} activos en producciÛn</p>
+            <p className="text-xs text-emerald-600 font-medium mt-0.5">{activeTenants} activos en producci√≥n</p>
           </div>
           <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
             <Building2 className="w-6 h-6" />
@@ -177,7 +177,7 @@ export const NexosMasterConsole: React.FC = () => {
           <div>
             <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Asientos / Usuarios</p>
             <h3 className="text-2xl font-bold text-slate-900 mt-1">{totalSeatsUsed} <span className="text-sm font-normal text-slate-400">/ {totalSeatsLimit}</span></h3>
-            <p className="text-xs text-indigo-600 font-medium mt-0.5">{Math.round((totalSeatsUsed / (totalSeatsLimit || 1)) * 100)}% ocupaciÛn de licencias</p>
+            <p className="text-xs text-indigo-600 font-medium mt-0.5">{Math.round((totalSeatsUsed / (totalSeatsLimit || 1)) * 100)}% ocupaci√≥n de licencias</p>
           </div>
           <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
             <Users className="w-6 h-6" />
@@ -212,7 +212,7 @@ export const NexosMasterConsole: React.FC = () => {
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
           <div>
             <h2 className="text-base font-bold text-slate-900">Despachos Inquilinos Registrados</h2>
-            <p className="text-xs text-slate-500">ConfiguraciÛn de marca, lÌmites de asientos y estado de facturaciÛn</p>
+            <p className="text-xs text-slate-500">Configuraci√≥n de marca, l√≠mites de asientos y estado de facturaci√≥n</p>
           </div>
           <span className="text-xs font-medium text-slate-500 bg-white px-3 py-1 border rounded-lg">
             {tenants.length} Inquilinos
@@ -227,9 +227,9 @@ export const NexosMasterConsole: React.FC = () => {
                 <th className="px-6 py-3.5">Slug / URL</th>
                 <th className="px-6 py-3.5">Asientos (Licencias)</th>
                 <th className="px-6 py-3.5">Precio / Asiento</th>
-                <th className="px-6 py-3.5">FacturaciÛn / Mes</th>
+                <th className="px-6 py-3.5">Facturaci√≥n / Mes</th>
                 <th className="px-6 py-3.5">Estado</th>
-                <th className="px-6 py-3.5 text-right">AcciÛn</th>
+                <th className="px-6 py-3.5 text-right">Acci√≥n</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -318,7 +318,7 @@ export const NexosMasterConsole: React.FC = () => {
                         <button
                           onClick={() => openEdit(t)}
                           className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
-                          title="Editar par·metros"
+                          title="Editar par√°metros"
                         >
                           <Edit3 className="w-4 h-4" />
                         </button>
@@ -397,7 +397,7 @@ export const NexosMasterConsole: React.FC = () => {
             </div>
           </div>
           <p className="text-xs text-slate-600 mb-3">
-            PolÌticas de Row-Level Security en PostgreSQL que impiden lectura cruzada entre inquilinos, con marcas de agua din·micas personalizadas por despacho.
+            Pol√≠ticas de Row-Level Security en PostgreSQL que impiden lectura cruzada entre inquilinos, con marcas de agua din√°micas personalizadas por despacho.
           </p>
           <div className="p-3 bg-violet-50/60 border border-violet-100 rounded-xl text-xs font-mono text-violet-900 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-violet-600 shrink-0" />
@@ -413,9 +413,9 @@ export const NexosMasterConsole: React.FC = () => {
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
               <div>
                 <h3 className="text-lg font-bold text-slate-900">
-                  {editingTenant ? 'Editar Par·metros de Inquilino' : 'Registrar Nuevo Despacho Inquilino'}
+                  {editingTenant ? 'Editar Par√°metros de Inquilino' : 'Registrar Nuevo Despacho Inquilino'}
                 </h3>
-                <p className="text-xs text-slate-500">ConfiguraciÛn Whitelabel y lÌmites de licenciamiento</p>
+                <p className="text-xs text-slate-500">Configuraci√≥n Whitelabel y l√≠mites de licenciamiento</p>
               </div>
               <button
                 onClick={() => { setShowNewModal(false); setEditingTenant(null); }}
@@ -429,14 +429,14 @@ export const NexosMasterConsole: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    RazÛn Social / Nombre Comercial *
+                    Raz√≥n Social / Nombre Comercial *
                   </label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Ej. Ajustadores del BajÌo S.C."
+                    placeholder="Ej. Ajustadores del Baj√≠o S.C."
                     className="w-full px-3.5 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
                   />
                 </div>
@@ -458,20 +458,20 @@ export const NexosMasterConsole: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Nombre Corto (AcrÛnimo)
+                    Nombre Corto (Acr‚Ä¢nimo)
                   </label>
                   <input
                     type="text"
                     value={shortName}
                     onChange={(e) => setShortName(e.target.value)}
-                    placeholder="Ej. BAJÕO"
+                    placeholder="Ej. BAJ√çO"
                     className="w-full px-3.5 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    LÌmite de Asientos (Usuarios) *
+                    L‚Ä¢mite de Asientos (Usuarios) *
                   </label>
                   <input
                     type="number"
@@ -549,7 +549,7 @@ export const NexosMasterConsole: React.FC = () => {
                     type="text"
                     value={watermarkText}
                     onChange={(e) => setWatermarkText(e.target.value)}
-                    placeholder="Ej. AJUSTADORES DEL BAJÕO S.C."
+                    placeholder="Ej. AJUSTADORES DEL BAJ√çO S.C."
                     className="w-full px-3.5 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
                   />
                 </div>

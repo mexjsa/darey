@@ -33,13 +33,13 @@ export default function Login() {
 
   const handleTOTP = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (totp.length !== 6) { setTotpError('El código debe tener 6 dígitos'); return; }
+    if (totp.length !== 6) { setTotpError('El codigo debe tener 6 dogitos'); return; }
     setLoading(true);
     setTotpError('');
     const ok = await verifyTOTP(totp);
     setLoading(false);
     if (!ok) {
-      setTotpError('Código incorrecto o expirado');
+      setTotpError('Codigo incorrecto o expirado');
       setTotp('');
     } else {
       setSuccess(true);
@@ -136,12 +136,12 @@ export default function Login() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Contraseña</label>
+                  <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">ContraseÃ±a</label>
                   <div className="relative">
                     <input
                       className="w-full px-3.5 py-2.5 pr-10 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900 text-sm"
                       type={showPass ? 'text' : 'password'}
-                      placeholder="••••••••"
+                      placeholder="oooooooo"
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       autoComplete="current-password"
@@ -168,7 +168,7 @@ export default function Login() {
                   ) : (
                     <>
                       <Lock className="w-4 h-4" />
-                      Iniciar Sesión
+                      Iniciar Sesion
                     </>
                   )}
                 </button>
@@ -181,9 +181,9 @@ export default function Login() {
                   <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Smartphone className="w-6 h-6 text-indigo-600" />
                   </div>
-                  <h3 className="font-bold text-slate-900 text-base">Verificación 2FA Requerida</h3>
+                  <h3 className="font-bold text-slate-900 text-base">Verificacion 2FA Requerida</h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Ingresa el código de 6 dígitos de tu aplicación autenticadora.
+                    Ingresa el codigo de 6 dogitos de tu aplicacion autenticadora.
                   </p>
                 </div>
 
@@ -224,9 +224,9 @@ export default function Login() {
                 <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-2">
                   <Shield className="w-6 h-6 text-emerald-600" />
                 </div>
-                <h3 className="font-bold text-slate-900 text-base">Configurar Autenticación 2FA</h3>
+                <h3 className="font-bold text-slate-900 text-base">Configurar AutenticaciÃ³n 2FA</h3>
                 <p className="text-xs text-slate-500">
-                  Por política de ciberseguridad NIST/OWASP L3, tu cuenta requiere doble factor de autenticación.
+                  Por polÃ­tica de ciberseguridad NIST/OWASP L3, tu cuenta requiere doble factor de autenticaciÃ³n.
                 </p>
                 <button
                   onClick={skipMFASetup}

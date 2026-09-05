@@ -1,6 +1,6 @@
 // ================================================================
-// NEXOS Security — Utilidades Criptográficas (SEC-008, SEC-009)
-// Cálculo de Hash SHA-256 para integridad y cadena de custodia
+// NEXOS Security â€” Utilidades Criptograficas (SEC-008, SEC-009)
+// Calculo de Hash SHA-256 para integridad y cadena de custodia
 // ================================================================
 
 export async function calculateSHA256(fileOrBuffer: File | Blob | ArrayBuffer): Promise<string> {
