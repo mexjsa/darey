@@ -2,30 +2,30 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useStore } from '@/store';
 import { roleLabel } from '@/utils/helpers';
-import { DAREY_ICON_CIRCLE } from '@/assets/logo';
 import {
   LayoutDashboard, FolderOpen, ClipboardList, Users, Settings,
   LogOut, Shield, ChevronLeft, ChevronRight, Bell, Wifi, WifiOff,
-  FileCheck, BarChart3, Menu, X, BookOpen
+  FileCheck, BarChart3, Menu, X, BookOpen, Building2, Sparkles
 } from 'lucide-react';
-
-// ================================================================
-// Layout principal â€” Sidebar + Header + Content area
-// ================================================================
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-function NavItem({ to, icon: Icon, label, badge }: {
-  to: string; icon: React.ElementType; label: string; badge?: number;
+function NavItem({ to, icon: Icon, label, badge, highlight }: {
+  to: string; icon: React.ElementType; label: string; badge?: number; highlight?: boolean;
 }) {
   const location = useLocation();
   const active = location.pathname.startsWith(to) && to !== '/';
   const exactActive = to === '/' && location.pathname === '/';
   return (
-    <Link to={to} className={`sidebar-link ${active || exactActive ? 'active' : ''}`}>
-      <Icon className="w-4 h-4 shrink-0" />
+    <Link
+      to={to}
+      className={`sidebar-link ${active || exactActive ? 'active' : ''} ${
+        highlight ? 'bg-indigo-50/80 text-indigo-700 font-semibold hover:bg-indigo-100' : ''
+      }`}
+    >
+      <Icon className={`w-4 h-4 shrink-0 ${highlight ? 'text-indigo-600' : ''}`} />
       <span className="flex-1">{label}</span>
       {badge != null && badge > 0 && (
         <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
@@ -37,36 +37,63 @@ function NavItem({ to, icon: Icon, label, badge }: {
 }
 
 export default function AppLayout({ children }: LayoutProps) {
-  const { currentUser, logout, expedientes, isOffline } = useStore();
+  const {
+    currentUser,
+    logout,
+    expedientes,
+    isOffline,
+    getCurrentTenant,
+    tenants,
+    currentTenantId,
+    switchTenant
+  } = useStore();
+
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   if (!currentUser) return null;
 
-  const isAdmin = ['SUPER_ADMIN', 'ADMINISTRADOR'].includes(currentUser.role);
-  const isReviewRole = ['SUPER_ADMIN', 'ADMINISTRADOR', 'COORDINADOR', 'REVISOR_SENIOR', 'REVISOR'].includes(currentUser.role);
+  const currentTenant = getCurrentTenant();
+  const isNexosMaster = currentUser.role === 'NEXOS_SUPER_ADMIN';
+  const isAdmin = ['SUPER_ADMIN', 'ADMINISTRADOR', 'NEXOS_SUPER_ADMIN'].includes(currentUser.role);
+  const isReviewRole = ['SUPER_ADMIN', 'ADMINISTRADOR', 'COORDINADOR', 'REVISOR_SENIOR', 'REVISOR', 'NEXOS_SUPER_ADMIN'].includes(currentUser.role);
 
-  // Contadores para badges
-  const pendingRevision = expedientes.filter(e =>
+  // Filtrado de expedientes por inquilino actual
+  const tenantExpedientes = isNexosMaster
+    ? expedientes
+    : expedientes.filter(e => e.tenant_id === currentTenant.id);
+
+  const pendingRevision = tenantExpedientes.filter(e =>
     ['LISTO_PARA_REVISION', 'REENVIADO'].includes(e.status)
   ).length;
 
-  const myExpedientes = expedientes.filter(e => e.created_by === currentUser.id || isReviewRole);
-
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
-      {/* Logo */}
+      {/* Dynamic Whitelabel Tenant Logo */}
       <div className="px-4 py-5 border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <img
-            src={DAREY_ICON_CIRCLE}
-            alt="DAREY"
-            className="w-10 h-10 rounded-full object-cover shadow-sm shrink-0 border border-gray-100"
-          />
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-sm shrink-0 overflow-hidden border border-gray-100"
+            style={{ backgroundColor: currentTenant.primary_color }}
+          >
+            {currentTenant.logo_url ? (
+              <img
+                src={currentTenant.logo_url}
+                alt={currentTenant.short_name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              currentTenant.short_name.slice(0, 2)
+            )}
+          </div>
           {!collapsed && (
-            <div>
-              <div className="font-bold text-carbon text-sm leading-tight tracking-wide">DAREY</div>
-              <div className="text-text-muted text-[10px] leading-tight font-medium">Integrador de Expedientes</div>
+            <div className="min-w-0 flex-1">
+              <div className="font-bold text-carbon text-sm leading-tight tracking-wide truncate">
+                {currentTenant.short_name}
+              </div>
+              <div className="text-text-muted text-[10px] leading-tight font-medium truncate">
+                Integrador Documental
+              </div>
             </div>
           )}
         </div>
@@ -74,41 +101,57 @@ export default function AppLayout({ children }: LayoutProps) {
 
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 font-semibold">Principal</p>}
+        {isNexosMaster && (
+          <>
+            {!collapsed && (
+              <p className="text-[10px] uppercase tracking-widest text-indigo-600 px-2 pb-1 font-bold flex items-center gap-1">
+                <Sparkles className="w-3 h-3" />
+                NEXOS SaaS Core
+              </p>
+            )}
+            <NavItem to="/nexos-admin" icon={Building2} label="Consola Maestra" highlight />
+            <div className="my-2 border-t border-slate-100" />
+          </>
+        )}
+
+        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 font-semibold">Operación</p>}
         <NavItem to="/" icon={LayoutDashboard} label="Dashboard" />
         <NavItem to="/expedientes" icon={FolderOpen} label="Expedientes" />
 
         {isReviewRole && (
           <>
-            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">RevisiÃ³n</p>}
-            <NavItem to="/revision" icon={ClipboardList} label="Cola de revisiÃ³n" badge={pendingRevision} />
-            <NavItem to="/matriz" icon={FileCheck} label="Matriz de control" />
+            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Revisión & Control</p>}
+            <NavItem to="/revision" icon={ClipboardList} label="Cola de revisión" badge={pendingRevision} />
+            <NavItem to="/matriz" icon={FileCheck} label="Matriz pericial" />
           </>
         )}
 
         {isAdmin && (
           <>
-            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">AdministraciÃ³n</p>}
-            <NavItem to="/admin/usuarios" icon={Users} label="Usuarios" />
-            <NavItem to="/admin/auditoria" icon={BarChart3} label="AuditorÃ­a" />
-            <NavItem to="/admin/config" icon={Settings} label="ConfiguraciÃ³n" />
+            {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Administración</p>}
+            <NavItem to="/admin/usuarios" icon={Users} label="Usuarios & Licencias" />
+            <NavItem to="/admin/auditoria" icon={BarChart3} label="Bitácora (Audit)" />
+            <NavItem to="/admin/config" icon={Settings} label="Configuración" />
           </>
         )}
 
-        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Ayuda & GuÃ­as</p>}
-        <NavItem to="/manual" icon={BookOpen} label="Manual de OperaciÃ³n" />
+        {!collapsed && <p className="text-[10px] uppercase tracking-widest text-text-muted px-2 pb-1 pt-3 font-semibold">Ayuda & Guías</p>}
+        <NavItem to="/manual" icon={BookOpen} label="Manual de Operación" />
       </nav>
 
-      {/* User info */}
+      {/* User Info Footer */}
       <div className="px-3 py-4 border-t border-gray-100">
         <div className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-bg-subtle transition-colors">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-azul-darey to-cian flex items-center justify-center shrink-0">
-            <span className="text-white text-xs font-bold">{currentUser.name.charAt(0)}</span>
+          <div
+            className="w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-xs shrink-0"
+            style={{ backgroundColor: currentTenant.primary_color }}
+          >
+            {currentUser.name.charAt(0)}
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0">
               <div className="text-xs font-semibold text-carbon truncate">{currentUser.name}</div>
-              <div className="text-[10px] text-text-muted">{roleLabel(currentUser.role)}</div>
+              <div className="text-[10px] text-text-muted truncate">{roleLabel(currentUser.role)}</div>
             </div>
           )}
         </div>
@@ -117,7 +160,7 @@ export default function AppLayout({ children }: LayoutProps) {
           className="sidebar-link w-full mt-1 text-red-500 hover:text-red-600 hover:bg-red-50"
         >
           <LogOut className="w-4 h-4 shrink-0" />
-          {!collapsed && 'Cerrar sesiÃ³n'}
+          {!collapsed && 'Cerrar sesión'}
         </button>
       </div>
     </div>
@@ -146,9 +189,9 @@ export default function AppLayout({ children }: LayoutProps) {
         </div>
       )}
 
-      {/* Main content */}
+      {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top header */}
+        {/* Top Header */}
         <header className="bg-white border-b border-gray-100 px-4 lg:px-6 py-3 flex items-center gap-3 shrink-0">
           <button
             className="lg:hidden p-1.5 rounded-lg hover:bg-bg-subtle text-text-muted"
@@ -157,18 +200,45 @@ export default function AppLayout({ children }: LayoutProps) {
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
+          {/* Active Tenant Badge / Quick Switcher */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-400 hidden md:inline">Inquilino Activo:</span>
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800">
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: currentTenant.primary_color }}
+              />
+              {currentTenant.name}
+            </div>
+
+            {isNexosMaster && (
+              <select
+                value={currentTenantId}
+                onChange={(e) => switchTenant(e.target.value)}
+                className="text-xs bg-indigo-50 border border-indigo-200 text-indigo-800 rounded-lg px-2 py-1 font-medium outline-none cursor-pointer"
+                title="Conmutar Inquilino (SaaS Master Switcher)"
+              >
+                {tenants.map(t => (
+                  <option key={t.id} value={t.id}>
+                    Cambiar a: {t.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+
           <div className="flex-1" />
 
           {/* Offline indicator */}
           {isOffline ? (
             <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-amber-200 rounded-full">
               <WifiOff className="w-3.5 h-3.5 text-amber-600" />
-              <span className="text-xs font-semibold text-amber-700">Sin conexiÃ³n</span>
+              <span className="text-xs font-semibold text-amber-700">Sin conexión</span>
             </div>
           ) : (
             <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green-50 border border-green-200 rounded-full">
               <Wifi className="w-3.5 h-3.5 text-green-600" />
-              <span className="text-xs font-semibold text-green-700">En lÃ­nea</span>
+              <span className="text-xs font-semibold text-green-700">En línea</span>
             </div>
           )}
 
@@ -183,12 +253,12 @@ export default function AppLayout({ children }: LayoutProps) {
 
           <div className="text-xs text-text-muted hidden sm:block">
             <span className="font-semibold text-carbon">{currentUser.username}</span>
-            <span className="mx-1">Â·</span>
+            <span className="mx-1">·</span>
             {roleLabel(currentUser.role)}
           </div>
         </header>
 
-        {/* Page content */}
+        {/* Page Content */}
         <main className="flex-1 overflow-y-auto">
           {children}
         </main>

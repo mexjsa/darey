@@ -82,6 +82,7 @@ export function progressColor(pct: number): string {
 
 export function roleLabel(role: string): string {
   const map: Record<string, string> = {
+    NEXOS_SUPER_ADMIN: 'Operador Maestro NEXOS',
     SUPER_ADMIN: 'Super Administrador',
     ADMIN_ASIGNADOR: 'Admin Asignador',
     ADMINISTRADOR: 'Administrador',
@@ -95,6 +96,7 @@ export function roleLabel(role: string): string {
 
 export function roleBadgeColor(role: UserRole): string {
   const map: Record<UserRole, string> = {
+    NEXOS_SUPER_ADMIN: 'bg-indigo-900 text-indigo-100',
     SUPER_ADMIN: 'bg-purple-100 text-purple-700',
     ADMIN_ASIGNADOR: 'bg-orange-100 text-orange-700',
     ADMINISTRADOR: 'bg-blue-100 text-blue-700',

@@ -122,18 +122,24 @@ function ExpedienteCard({ exp, isAdjuster }: { exp: Expediente; isAdjuster?: boo
 }
 
 export default function Dashboard() {
-  const { currentUser, expedientes } = useStore();
+  const { currentUser, expedientes, getCurrentTenant } = useStore();
   if (!currentUser) return null;
 
+  const currentTenant = getCurrentTenant();
   const myRole = currentUser.role;
-  const isRevRole = isRevisor(myRole);
-  const isAssignerRole = canAssign(myRole);
+  const isNexosMaster = myRole === 'NEXOS_SUPER_ADMIN';
+  const isRevRole = isRevisor(myRole) || isNexosMaster;
+  const isAssignerRole = canAssign(myRole) || isNexosMaster;
   const isAdjuster = myRole === 'AJUSTADOR';
 
-  // Expedientes filtrados según rol
+  // Expedientes filtrados según inquilino y rol
+  const tenantExpedientes = isNexosMaster
+    ? expedientes
+    : expedientes.filter(e => e.tenant_id === currentTenant.id);
+
   const myExps = isAdjuster
-    ? expedientes.filter(e => e.assigned_to === currentUser.id)
-    : expedientes;
+    ? tenantExpedientes.filter(e => e.assigned_to === currentUser.id)
+    : tenantExpedientes;
 
   const recienAsignados = myExps.filter(e => e.status === 'ASIGNADO');
 

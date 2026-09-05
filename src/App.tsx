@@ -10,10 +10,7 @@ import ExpedienteDetail from '@/pages/ExpedienteDetail';
 import ColaRevision from '@/pages/ColaRevision';
 import Administracion from '@/pages/Administracion';
 import ManualOperacion from '@/pages/ManualOperacion';
-
-// ================================================================
-// App Router — DAREY Integrador de Expedientes
-// ================================================================
+import { NexosMasterConsole } from '@/pages/NexosMasterConsole';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { authStep, currentUser } = useStore();
@@ -35,7 +32,7 @@ export default function App() {
           element={authStep === 'authenticated' ? <Navigate to="/" replace /> : <Login />}
         />
 
-        {/* Protected */}
+        {/* Protected Core */}
         <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/expedientes" element={<ProtectedRoute><Expedientes /></ProtectedRoute>} />
         <Route path="/expedientes/nuevo" element={<ProtectedRoute><NuevoExpediente /></ProtectedRoute>} />
@@ -45,6 +42,9 @@ export default function App() {
         <Route path="/admin/usuarios" element={<ProtectedRoute><Administracion /></ProtectedRoute>} />
         <Route path="/admin/auditoria" element={<ProtectedRoute><Administracion /></ProtectedRoute>} />
         <Route path="/admin/config" element={<ProtectedRoute><Administracion /></ProtectedRoute>} />
+
+        {/* NEXOS SaaS Master Admin Console */}
+        <Route path="/nexos-admin" element={<ProtectedRoute><NexosMasterConsole /></ProtectedRoute>} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to={authStep === 'authenticated' ? '/' : '/login'} replace />} />

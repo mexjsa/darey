@@ -21,7 +21,7 @@ const STATUS_OPTIONS: ExpedienteStatus[] = [
 ];
 
 export default function Expedientes() {
-  const { currentUser, expedientes, users, getAdjusters } = useStore();
+  const { currentUser, expedientes, users, getAdjusters, getCurrentTenant } = useStore();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<ExpedienteStatus | 'TODOS'>('TODOS');
@@ -29,14 +29,20 @@ export default function Expedientes() {
   const [showFilters, setShowFilters] = useState(false);
 
   if (!currentUser) return null;
-  const isAssigner = canAssign(currentUser.role);
-  const isReviewer = isRevisor(currentUser.role);
+  const currentTenant = getCurrentTenant();
+  const isNexosMaster = currentUser.role === 'NEXOS_SUPER_ADMIN';
+  const isAssigner = canAssign(currentUser.role) || isNexosMaster;
+  const isReviewer = isRevisor(currentUser.role) || isNexosMaster;
   const canSeeAll = isAssigner || isReviewer;
   const adjusters = getAdjusters();
 
-  const base = canSeeAll
+  const tenantExpedientes = isNexosMaster
     ? expedientes
-    : expedientes.filter(e => e.assigned_to === currentUser.id);
+    : expedientes.filter(e => e.tenant_id === currentTenant.id);
+
+  const base = canSeeAll
+    ? tenantExpedientes
+    : tenantExpedientes.filter(e => e.assigned_to === currentUser.id);
 
   const filtered = base.filter(exp => {
     const matchStatus = statusFilter === 'TODOS' || exp.status === statusFilter;

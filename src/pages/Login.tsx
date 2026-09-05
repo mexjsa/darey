@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { useStore } from '@/store';
-import { Shield, Eye, EyeOff, Lock, Smartphone, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
-import { DAREY_ICON_CIRCLE } from '@/assets/logo';
-
-// ================================================================
-// Pantalla de Login ‚Äî DAREY Integrador
-// ================================================================
+import { Shield, Eye, EyeOff, Lock, Smartphone, CheckCircle, AlertCircle, RefreshCw, Building2, Sparkles } from 'lucide-react';
 
 export default function Login() {
-  const { loginWithPassword, verifyTOTP, authStep, loginError, skipMFASetup } = useStore();
+  const {
+    loginWithPassword,
+    verifyTOTP,
+    authStep,
+    loginError,
+    skipMFASetup,
+    getCurrentTenant,
+    tenants,
+    currentTenantId,
+    switchTenant
+  } = useStore();
+
+  const currentTenant = getCurrentTenant();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
@@ -26,13 +33,13 @@ export default function Login() {
 
   const handleTOTP = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (totp.length !== 6) { setTotpError('El c√≥digo debe tener 6 d√≠gitos'); return; }
+    if (totp.length !== 6) { setTotpError('El cÛdigo debe tener 6 dÌgitos'); return; }
     setLoading(true);
     setTotpError('');
     const ok = await verifyTOTP(totp);
     setLoading(false);
     if (!ok) {
-      setTotpError('C√≥digo incorrecto o expirado');
+      setTotpError('CÛdigo incorrecto o expirado');
       setTotp('');
     } else {
       setSuccess(true);
@@ -40,46 +47,86 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-azul-profundo via-azul-darey to-cian flex items-center justify-center p-4">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10"
-           style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+    <div
+      className="min-h-screen flex items-center justify-center p-4 relative"
+      style={{
+        background: `linear-gradient(135deg, ${currentTenant.secondary_color} 0%, ${currentTenant.primary_color} 100%)`
+      }}
+    >
+      {/* Background Pattern */}
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}
+      />
 
       <div className="relative w-full max-w-md">
-        {/* Logo Card */}
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        {/* Tenant Quick Switcher Pills for Demo */}
+        <div className="mb-4 flex items-center justify-center gap-2 flex-wrap">
+          <span className="text-[11px] font-semibold text-white/80 bg-black/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
+            ?? Despacho:
+          </span>
+          {tenants.map(t => (
+            <button
+              key={t.id}
+              onClick={() => switchTenant(t.id)}
+              className={`text-xs px-3 py-1 rounded-full font-medium transition-all backdrop-blur-sm ${
+                currentTenantId === t.id
+                  ? 'bg-white text-slate-900 shadow-md font-bold'
+                  : 'bg-white/20 text-white hover:bg-white/30'
+              }`}
+            >
+              {t.short_name}
+            </button>
+          ))}
+        </div>
+
+        {/* Login Card */}
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/20">
           {/* Header */}
-          <div className="bg-gradient-to-r from-azul-profundo to-azul-darey px-8 py-6 text-center">
+          <div
+            className="px-8 py-6 text-center text-white relative"
+            style={{
+              background: `linear-gradient(to right, ${currentTenant.secondary_color}, ${currentTenant.primary_color})`
+            }}
+          >
             <div className="flex justify-center mb-3">
-              <img
-                src={DAREY_ICON_CIRCLE}
-                alt="Logo DAREY"
-                className="w-16 h-16 rounded-full object-cover shadow-lg border-2 border-white/80 bg-white"
-              />
+              <div
+                className="w-16 h-16 rounded-2xl shadow-lg border-2 border-white/80 bg-white flex items-center justify-center overflow-hidden"
+              >
+                {currentTenant.logo_url ? (
+                  <img
+                    src={currentTenant.logo_url}
+                    alt={currentTenant.short_name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-xl font-bold text-slate-800">{currentTenant.short_name.slice(0, 2)}</span>
+                )}
+              </div>
             </div>
-            <h1 className="text-xl font-bold text-white tracking-wide">DAREY</h1>
-            <p className="text-cian/90 text-sm font-semibold mt-0.5">Integrador de Expedientes</p>
-            <p className="text-white/70 text-xs mt-0.5 font-medium">Ajustadores Profesionales S.C.</p>
+            <h1 className="text-xl font-bold tracking-wide">{currentTenant.short_name}</h1>
+            <p className="text-white/90 text-sm font-medium mt-0.5">Integrador Documental de Campo</p>
+            <p className="text-white/70 text-[11px] mt-0.5 font-normal">{currentTenant.name}</p>
           </div>
 
-          {/* Content */}
+          {/* Form Content */}
           <div className="px-8 py-6">
             {authStep === 'login' && (
               <form onSubmit={handleLogin} className="space-y-4 animate-fadeIn">
                 <div>
-                  <p className="text-sm font-semibold text-carbon mb-4">Acceso al sistema</p>
+                  <p className="text-sm font-semibold text-slate-800 mb-4">Acceso Seguro de Personal</p>
                   {loginError && (
-                    <div className="alert-error mb-4">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
+                    <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs flex items-center gap-2 mb-4">
+                      <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
                       {loginError}
                     </div>
                   )}
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-text-muted uppercase tracking-wide">Usuario</label>
+                  <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Usuario</label>
                   <input
-                    className="input-darey"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900 text-sm"
                     placeholder="Ej. AJUSTADOR-01"
                     value={username}
                     onChange={e => setUsername(e.target.value.toUpperCase())}
@@ -89,12 +136,12 @@ export default function Login() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-text-muted uppercase tracking-wide">Contrase√±a</label>
+                  <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">ContraseÒa</label>
                   <div className="relative">
                     <input
-                      className="input-darey pr-10"
+                      className="w-full px-3.5 py-2.5 pr-10 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900 text-sm"
                       type={showPass ? 'text' : 'password'}
-                      placeholder="‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢"
+                      placeholder="ïïïïïïïï"
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       autoComplete="current-password"
@@ -102,7 +149,7 @@ export default function Login() {
                     />
                     <button
                       type="button"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-carbon"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                       onClick={() => setShowPass(v => !v)}
                     >
                       {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -110,103 +157,99 @@ export default function Login() {
                   </div>
                 </div>
 
-                {/* Turnstile visual simulado */}
-                <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg bg-gray-50">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="text-xs text-text-muted">Verificaci√≥n anti-bots activa <span className="text-azul-darey font-semibold">Cloudflare Turnstile</span></span>
-                </div>
-
-                <button type="submit" className="btn-primary w-full py-2.5" disabled={loading}>
-                  {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
-                  {loading ? 'Verificando...' : 'Iniciar sesi√≥n'}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3 text-white font-semibold rounded-xl text-sm shadow-md hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                  style={{ backgroundColor: currentTenant.primary_color }}
+                >
+                  {loading ? (
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <>
+                      <Lock className="w-4 h-4" />
+                      Iniciar SesiÛn
+                    </>
+                  )}
                 </button>
               </form>
-            )}
-
-            {authStep === 'mfa_setup' && (
-              <div className="space-y-5 animate-fadeIn">
-                <div className="text-center">
-                  <Smartphone className="w-12 h-12 text-azul-darey mx-auto mb-3" />
-                  <h2 className="font-bold text-carbon">Configura el Authenticator</h2>
-                  <p className="text-sm text-text-muted mt-1">Es la primera vez que accedes. Escanea el c√≥digo QR con tu app Authenticator.</p>
-                </div>
-
-                {/* QR simulado */}
-                <div className="flex justify-center">
-                  <div className="w-40 h-40 border-4 border-azul-darey rounded-lg flex items-center justify-center bg-bg-subtle">
-                    <div className="text-center text-xs text-text-muted">
-                      <div className="text-3xl mb-1">üì±</div>
-                      <div className="font-semibold">QR Simulado</div>
-                      <div className="text-azul-darey font-mono mt-1 text-[10px]">DAREY-DEMO</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="alert-info text-xs">
-                  <div>En producci√≥n aqu√≠ aparecer√° el c√≥digo QR real TOTP. Usa Google Authenticator, Microsoft Authenticator o Authy.</div>
-                </div>
-
-                <button onClick={skipMFASetup} className="btn-primary w-full">
-                  Continuar (demo sin TOTP real)
-                </button>
-              </div>
             )}
 
             {authStep === 'totp' && (
               <form onSubmit={handleTOTP} className="space-y-5 animate-fadeIn">
                 <div className="text-center">
-                  <Smartphone className="w-12 h-12 text-azul-darey mx-auto mb-3" />
-                  <h2 className="font-bold text-carbon">Verificaci√≥n de 2 pasos</h2>
-                  <p className="text-sm text-text-muted mt-1">Ingresa el c√≥digo de 6 d√≠gitos de tu app Authenticator.</p>
+                  <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Smartphone className="w-6 h-6 text-indigo-600" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-base">VerificaciÛn 2FA Requerida</h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Ingresa el cÛdigo de 6 dÌgitos de tu aplicaciÛn autenticadora.
+                  </p>
                 </div>
 
                 {totpError && (
-                  <div className="alert-error">
-                    <AlertCircle className="w-4 h-4" />
+                  <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
                     {totpError}
                   </div>
                 )}
 
-                {/* Input TOTP estilo big */}
-                <div>
+                <div className="space-y-2">
                   <input
-                    className="w-full text-center text-2xl font-bold tracking-[0.5em] py-3 border-2 border-gray-200 rounded-xl focus:border-azul-darey focus:ring-2 focus:ring-azul-darey/20 outline-none bg-bg-subtle"
                     type="text"
                     inputMode="numeric"
+                    pattern="[0-9]*"
                     maxLength={6}
-                    placeholder="000000"
+                    placeholder="123456"
                     value={totp}
-                    onChange={e => setTotp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    onChange={e => setTotp(e.target.value.replace(/\D/g, ''))}
+                    className="w-full text-center text-2xl font-mono tracking-[0.5em] py-3 border-2 border-slate-200 rounded-xl focus:border-indigo-500 outline-none"
                     autoFocus
                   />
                 </div>
 
-                <button type="submit" className="btn-primary w-full py-2.5" disabled={loading}>
-                  {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Shield className="w-4 h-4" />}
-                  {loading ? 'Verificando...' : 'Verificar c√≥digo'}
-                </button>
-
-                <button type="button" className="btn-ghost w-full text-xs"
-                  onClick={() => useStore.setState({ authStep: 'login', pendingUserId: null })}>
-                  ‚Üê Volver al login
+                <button
+                  type="submit"
+                  disabled={loading || totp.length !== 6}
+                  className="w-full py-3 text-white font-semibold rounded-xl text-sm shadow-md hover:opacity-95 transition-all disabled:opacity-50"
+                  style={{ backgroundColor: currentTenant.primary_color }}
+                >
+                  {loading ? 'Verificando...' : 'Verificar y Entrar'}
                 </button>
               </form>
             )}
+
+            {authStep === 'mfa_setup' && (
+              <div className="space-y-4 text-center animate-fadeIn">
+                <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Shield className="w-6 h-6 text-emerald-600" />
+                </div>
+                <h3 className="font-bold text-slate-900 text-base">Configurar AutenticaciÛn 2FA</h3>
+                <p className="text-xs text-slate-500">
+                  Por polÌtica de ciberseguridad NIST/OWASP L3, tu cuenta requiere doble factor de autenticaciÛn.
+                </p>
+                <button
+                  onClick={skipMFASetup}
+                  className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-xs transition-all"
+                >
+                  Continuar al Entorno
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Footer */}
-          <div className="px-8 pb-5 text-center">
-            <p className="text-xs text-text-muted">
-              DAREY Ajustadores Profesionales S.C. ¬∑ Sistema v1.0
-            </p>
+          {/* Footer Powered By NEXOS */}
+          <div className="px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+            <span className="flex items-center gap-1">
+              <Shield className="w-3.5 h-3.5 text-indigo-500" />
+              Cifrado AES-256 + SHA-256
+            </span>
+            <span className="font-semibold text-slate-600 flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-indigo-500" />
+              Powered by NEXOS IA
+            </span>
           </div>
         </div>
-
-        <p className="text-center text-white/50 text-xs mt-4">
-          Protegido por Cloudflare ¬∑ TLS activo
-        </p>
       </div>
     </div>
   );

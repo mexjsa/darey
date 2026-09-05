@@ -1,11 +1,34 @@
 // ================================================================
-// DAREY Integrador — Tipos Globales
-// Refleja el modelo de datos del PRD §27
+// NEXOS Integrador Documental — Tipos Globales Multi-Inquilino
+// Refleja el modelo de datos SaaS B2B y PRD de Ciberseguridad L3
 // ================================================================
 
+export type TenantStatus = 'ACTIVO' | 'SUSPENDIDO' | 'PRUEBA';
+
+export interface Tenant {
+  id: string;
+  slug: string;                  // 'darey', 'centro', 'norte'
+  name: string;                  // 'DAREY Ajustadores Profesionales S.C.'
+  short_name: string;            // 'DAREY'
+  rfc?: string;
+  logo_url: string;              // Base64 o URL del logotipo
+  primary_color: string;         // Hex code '#0089A9'
+  secondary_color: string;       // Hex code '#005A82'
+  accent_color: string;          // Hex code '#F8C400'
+  watermark_text: string;        // 'DAREY AJUSTADORES'
+  watermark_opacity: number;     // 0.25 (25%)
+  plan_seats_limit: number;      // Límite de usuarios/asientos contratados (ej. 10)
+  price_per_user_mxn: number;    // Costo unitario por usuario al mes ($490 MXN)
+  billing_cycle: 'MENSUAL' | 'ANUAL';
+  storage_retention_days: number;// 365 días por defecto
+  status: TenantStatus;
+  created_at: string;
+}
+
 export type UserRole =
-  | 'SUPER_ADMIN'
-  | 'ADMIN_ASIGNADOR'   // Central — crea expedientes y asigna adjuster
+  | 'NEXOS_SUPER_ADMIN' // Operador Master SaaS NEXOS
+  | 'SUPER_ADMIN'       // Admin General del Despacho Inquilino
+  | 'ADMIN_ASIGNADOR'   // Central del Despacho — crea expedientes y asigna adjuster
   | 'ADMINISTRADOR'
   | 'COORDINADOR'
   | 'REVISOR_SENIOR'
@@ -14,6 +37,7 @@ export type UserRole =
 
 export interface User {
   id: string;
+  tenant_id: string;    // Inquilino al que pertenece el usuario
   username: string;
   name: string;
   role: UserRole;
@@ -199,6 +223,7 @@ export interface EvidenciaVersion {
   file_name: string;
   file_type: string;
   file_size: number;
+  sha256_hash?: string;        // Hash criptográfico SHA-256 para cadena de custodia (SEC-009)
   captured_at: string;
   uploaded_at: string;
   uploaded_by: string;
@@ -235,6 +260,7 @@ export interface ComponenteInstance {
 
 export interface Expediente {
   id: string;
+  tenant_id: string;           // Despacho Inquilino propietario del expediente (SEC-005)
   numero_siniestro: string;
   fecha_siniestro: string;
   hora_siniestro?: string;
@@ -265,8 +291,10 @@ export interface Expediente {
   // ---- REVISIÓN ----
   reviewer_id?: string;
 
-  // ---- ESTADO ----
+  // ---- ESTADO & ALMACENAMIENTO (SEC-008, SEC-013) ----
   status: ExpedienteStatus;
+  archival_tier?: 'HOT' | 'WARM' | 'COLD'; // Nivel de almacenamiento jerárquico
+  sha256_manifest?: string;    // Hash SHA-256 consolidado del expediente sellado
   integration_percent: number;
   validation_percent: number;
   source_mode: SourceMode;
@@ -279,11 +307,12 @@ export interface Expediente {
 }
 
 // ----------------------------------------------------------------
-// AUDITORÍA
+// AUDITORÍA (SEC-014)
 // ----------------------------------------------------------------
 
 export interface AuditEntry {
   id: string;
+  tenant_id: string;           // Inquilino auditado
   user_id: string;
   username: string;
   action: string;
@@ -292,5 +321,6 @@ export interface AuditEntry {
   details?: string;
   prev_value?: string;
   new_value?: string;
+  ip_address?: string;
   created_at: string;
 }

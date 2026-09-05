@@ -9,10 +9,16 @@ import { ClipboardList, Eye, Clock, AlertCircle, RefreshCw } from 'lucide-react'
 // ================================================================
 
 export default function ColaRevision() {
-  const { expedientes, currentUser, users } = useStore();
+  const { expedientes, currentUser, users, getCurrentTenant } = useStore();
+  const currentTenant = getCurrentTenant();
+  const isNexosMaster = currentUser?.role === 'NEXOS_SUPER_ADMIN';
   const [sort, setSort] = useState<'date' | 'status'>('date');
 
-  const pendientes = expedientes.filter(e =>
+  const tenantExpedientes = isNexosMaster
+    ? expedientes
+    : expedientes.filter(e => e.tenant_id === currentTenant.id);
+
+  const pendientes = tenantExpedientes.filter(e =>
     ['LISTO_PARA_REVISION', 'EN_REVISION', 'REENVIADO'].includes(e.status)
   ).sort((a, b) => {
     if (sort === 'date') return new Date(a.submitted_at || '').getTime() - new Date(b.submitted_at || '').getTime();
